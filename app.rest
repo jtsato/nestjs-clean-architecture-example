@@ -1,0 +1,35 @@
+###
+GET http://localhost:3000/health-check/live
+
+###
+GET http://localhost:3000/health-check/ready
+
+###
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+  "name": "jszero",
+  "email": "john.smith.zero@xyz.com",
+  "password": "P@ssw0rd",
+  "fullName": "John Smith"
+}
+
+###
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+  "name": "",
+  "email": "wrong.email.com",
+  "password": "",
+  "fullName": null
+}
+
+###
+GET http://localhost:3000/users/by-name?name=jszero
+
+
+###
+GET http://localhost:3000/users/by-name?name=unknown
+

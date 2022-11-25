@@ -1,0 +1,28 @@
+import { Injectable } from '@nestjs/common';
+// eslint-disable-next-line max-len
+import { registerDecorator, ValidationArguments, ValidationOptions, ValidatorConstraint, ValidatorConstraintInterface } from 'class-validator';
+import { GetUserByNameUseCase } from '@/core/usecases/get-user-by-name';
+
+@Injectable()
+@ValidatorConstraint()
+export class IsUsernameUniqueConstraint implements ValidatorConstraintInterface {
+    constructor(private getUserByNameUseCase: GetUserByNameUseCase) { }
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    validate(username: string, validationArguments?: ValidationArguments | undefined): boolean | Promise<boolean> {
+        const user = this.getUserByNameUseCase.execute({ name: username });
+        return user === undefined;
+    }
+}
+
+export function IsUserNameUnique(validationOptions?: ValidationOptions) {
+    return (object: object, propertyName: string) => {
+        registerDecorator({
+            target: object.constructor,
+            propertyName,
+            options: validationOptions,
+            constraints: [],
+            validator: IsUsernameUniqueConstraint,
+        });
+    };
+}
