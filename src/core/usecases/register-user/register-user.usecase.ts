@@ -3,12 +3,15 @@ import { UniqueConstraintException } from '@/core/exceptions';
 import { User } from '@/core/models';
 import { RegisterUserCommand, RegisterUserGateway } from '@/core/usecases/register-user';
 import { GetUserByNameGateway } from '@/core/usecases/xcutting';
+import { IGetDateTimeService } from '@/core/common';
 
 @Injectable()
 export class RegisterUserUseCase {
     constructor(
         @Inject(GetUserByNameGateway)
         private getUserByNameGateway: GetUserByNameGateway,
+        @Inject(IGetDateTimeService)
+        private getDateTimeService: IGetDateTimeService,
         @Inject(RegisterUserGateway)
         private registerUserGateway: RegisterUserGateway,
     ) { }
@@ -21,7 +24,7 @@ export class RegisterUserUseCase {
             command.email,
             command.password,
             command.fullName,
-            new Date(),
+            this.getDateTimeService.now(),
         );
 
         return this.registerUserGateway.execute(user);

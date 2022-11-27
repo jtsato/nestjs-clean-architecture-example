@@ -8,15 +8,23 @@ import { GetUserByNameProvider, RegisterUserProvider } from '@/infra/providers';
 import { GetUserByNameGateway } from '@/core/usecases/xcutting';
 import { UserRepository } from '@/infra/repositories';
 import { IRegisterUserUseCase } from '@/core/usecases/register-user/register-user-usecase.interface';
+import { GetDateTimeService, IGetDateTimeService } from '@/core/common';
 
 @Module({
     imports: [GetUserByNameModule],
     controllers: [RegisterUserController],
     providers: [
-        UserRepository,
-        RegisterUserUseCase,
-        IsUsernameUniqueConstraint,
+        {
+            provide: IGetDateTimeService,
+            useClass: GetDateTimeService,
+        },
         GetUserByNameUseCase,
+        {
+            provide: GetUserByNameGateway,
+            useClass: GetUserByNameProvider,
+        },
+        IsUsernameUniqueConstraint,
+        RegisterUserUseCase,
         {
             provide: IRegisterUserUseCase,
             useClass: RegisterUserUseCase,
@@ -25,10 +33,7 @@ import { IRegisterUserUseCase } from '@/core/usecases/register-user/register-use
             provide: RegisterUserGateway,
             useClass: RegisterUserProvider,
         },
-        {
-            provide: GetUserByNameGateway,
-            useClass: GetUserByNameProvider,
-        },
+        UserRepository,
     ],
 })
 

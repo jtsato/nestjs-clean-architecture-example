@@ -6,6 +6,9 @@ FOR /F "tokens=*" %%k IN ('DIR src /b /s /ad') DO (
 		ECHO Recreating index.ts for %%k
 	)
 	FOR /F "tokens=*" %%j IN ('DIR %%k\*.ts /b /a /on') DO (
-      ECHO export * from './%%~nj';>> %%k\index.ts
+		(@ECHO %%j ^| FINDSTR ".spec.ts") | (SET /p spec=& SET spec)
+		IF %spec% == "" (
+      		ECHO export * from './%%~nj';>> %%k\index.ts
+		)
 	)
 )
