@@ -5,6 +5,7 @@ import { RegisterUserCommand, RegisterUserGateway, RegisterUserUseCase } from '@
 import { User } from '@/core/models';
 import { GetUserByNameGateway } from '@/core/usecases/xcutting';
 import { IGetDateTimeService } from '@/core/common';
+import { UniqueConstraintException } from '@/core/exceptions';
 
 const getUserByNameGatewayMock: MockProxy<GetUserByNameGateway> = mock<GetUserByNameGateway>();
 const getDateTimeServiceMock: MockProxy<IGetDateTimeService> = mock<IGetDateTimeService>();
@@ -19,6 +20,29 @@ describe('RegisterUserUseCase', () => {
     });
 
     describe('execute()', () => {
+        it('should throw error when username is already registered', async () => {
+            // Arrange
+            getUserByNameGatewayMock
+                .execute
+                .calledWith('jszero')
+                .mockResolvedValue(new User(
+                    1,
+                    'jszero',
+                    'john.smith.zero@xyz.com',
+                    'P@ssw0rd',
+                    'John Smith Zero',
+                    new Date(2022, 11, 27, 0, 0, 0),
+                ));
+
+            const command: RegisterUserCommand = new RegisterUserCommand('jszero', 'john.smith.zero@xyz.com', 'P@ssw0rd', 'John Smith Zero');
+
+            // Act
+            // Assert
+            await expect(registerUserUseCase.execute(command))
+                .rejects
+                .toEqual(new UniqueConstraintException('validation.user.name.duplicated {}', ['jszero']));
+        });
+
         it('should run successfully when username is not registered', async () => {
             // Arrange
             getUserByNameGatewayMock
