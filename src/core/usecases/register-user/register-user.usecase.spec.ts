@@ -41,7 +41,14 @@ describe('RegisterUserUseCase', () => {
                     'John Smith Zero',
                     new Date(2022, 11, 27, 0, 0, 0),
                 )))
-                .mockResolvedValue(new User(1, 'jszero', 'john.smith.zero@xyz.com', 'P@ssw0rd', 'John Smith Zero', new Date(2022, 11, 27, 0, 0, 0)));
+                .mockResolvedValue(new User(
+                    1,
+                    'jszero',
+                    'john.smith.zero@xyz.com',
+                    'P@ssw0rd',
+                    'John Smith Zero',
+                    new Date(2022, 11, 27, 0, 0, 0),
+                ));
 
             const command: RegisterUserCommand = new RegisterUserCommand('jszero', 'john.smith.zero@xyz.com', 'P@ssw0rd', 'John Smith Zero');
 
