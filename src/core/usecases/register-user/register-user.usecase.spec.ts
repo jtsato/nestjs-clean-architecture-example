@@ -1,6 +1,6 @@
 /* eslint-disable sonarjs/no-duplicate-string */
 import { MockProxy, mock, mockReset } from 'jest-mock-extended';
-import { dataObjectMatcher } from '~/test/helpers';
+import { CatchExceptionHelper, dataObjectMatcher } from '~/test/helpers';
 import { IRegisterUserUseCase, RegisterUserCommand, RegisterUserGateway, RegisterUserUseCase } from '@/core/usecases/register-user';
 import { User } from '@/core/models';
 import { GetUserByNameGateway } from '@/core/usecases/xcutting';
@@ -37,10 +37,14 @@ describe('RegisterUserUseCase', () => {
             const command: RegisterUserCommand = new RegisterUserCommand('jszero', 'john.smith.zero@xyz.com', 'P@ssw0rd', 'John Smith Zero');
 
             // Act
+            const exception: UniqueConstraintException = await CatchExceptionHelper.catchAsync(() => usecase.execute(command));
+
             // Assert
-            await expect(usecase.execute(command))
-                .rejects
-                .toEqual(new UniqueConstraintException('validation.user.name.duplicated {}', ['jszero']));
+            expect(exception).not.toBeNull();
+            expect(exception.message).toBe('validation.user.name.duplicated {}');
+            expect(exception.Parameters).not.toBeNull();
+            expect(exception.Parameters).toHaveLength(1);
+            expect(exception.Parameters[0]).toBe('jszero');
         });
 
         it('should run successfully when username is not registered', async () => {
