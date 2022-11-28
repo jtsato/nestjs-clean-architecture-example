@@ -1,7 +1,7 @@
 /* eslint-disable sonarjs/no-duplicate-string */
 import { MockProxy, mock, mockReset } from 'jest-mock-extended';
 import { dataObjectMatcher } from '~/test/helpers';
-import { RegisterUserCommand, RegisterUserGateway, RegisterUserUseCase } from '@/core/usecases/register-user';
+import { IRegisterUserUseCase, RegisterUserCommand, RegisterUserGateway, RegisterUserUseCase } from '@/core/usecases/register-user';
 import { User } from '@/core/models';
 import { GetUserByNameGateway } from '@/core/usecases/xcutting';
 import { IGetDateTimeService } from '@/core/common';
@@ -11,7 +11,7 @@ const getUserByNameGatewayMock: MockProxy<GetUserByNameGateway> = mock<GetUserBy
 const getDateTimeServiceMock: MockProxy<IGetDateTimeService> = mock<IGetDateTimeService>();
 const registerUserGatewayMock: MockProxy<RegisterUserGateway> = mock<RegisterUserGateway>();
 
-const registerUserUseCase: RegisterUserUseCase = new RegisterUserUseCase(getUserByNameGatewayMock, getDateTimeServiceMock, registerUserGatewayMock);
+const usecase: IRegisterUserUseCase = new RegisterUserUseCase(getUserByNameGatewayMock, getDateTimeServiceMock, registerUserGatewayMock);
 
 describe('RegisterUserUseCase', () => {
     beforeEach(() => {
@@ -38,7 +38,7 @@ describe('RegisterUserUseCase', () => {
 
             // Act
             // Assert
-            await expect(registerUserUseCase.execute(command))
+            await expect(usecase.execute(command))
                 .rejects
                 .toEqual(new UniqueConstraintException('validation.user.name.duplicated {}', ['jszero']));
         });
@@ -77,9 +77,10 @@ describe('RegisterUserUseCase', () => {
             const command: RegisterUserCommand = new RegisterUserCommand('jszero', 'john.smith.zero@xyz.com', 'P@ssw0rd', 'John Smith Zero');
 
             // Act
-            const user = await registerUserUseCase.execute(command);
+            const user = await usecase.execute(command);
 
             // Assert
+            expect(user).not.toBeNull();
             expect(user).toBeInstanceOf(User);
             expect(user.id).toBe(1);
             expect(user.name).toBe('jszero');

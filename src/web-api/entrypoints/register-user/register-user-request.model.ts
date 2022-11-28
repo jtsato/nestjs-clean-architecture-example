@@ -1,5 +1,5 @@
 import { IsEmail, IsNotEmpty } from 'class-validator';
-import { IsUserNameUnique } from './is-user-name-unique.constraint';
+import { IsUserNameUnique } from '@/web-api/entrypoints/register-user';
 
 export class RegisterUserRequest {
     @IsUserNameUnique({

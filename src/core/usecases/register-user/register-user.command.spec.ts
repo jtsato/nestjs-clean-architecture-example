@@ -26,12 +26,13 @@ describe('RegisterUserCommand', () => {
             expect(exception.Parameters[1]).toEqual(errors);
         });
 
-        it('should run successfully when username is not registered', () => {
+        it('should create command object when the parameters are filled correcly', () => {
             // Arrange
             // Act
             const command: RegisterUserCommand = new RegisterUserCommand('jszero', 'john.smith.zero@xyz.com', 'P@ssw0rd', 'John Smith Zero');
 
             // Assert
+            expect(command).not.toBeNull();
             expect(command.name).toBe('jszero');
             expect(command.email).toBe('john.smith.zero@xyz.com');
             expect(command.password).toBe('P@ssw0rd');

@@ -1,4 +1,4 @@
-import { Field } from './field.model';
+import { Field } from '@/web-api/commons/models';
 
 export class ResponseStatus {
     code: number;

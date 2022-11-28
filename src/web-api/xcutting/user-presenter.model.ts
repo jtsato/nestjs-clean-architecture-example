@@ -1,5 +1,5 @@
 import { User } from '@/core/models';
-import { UserResponse } from './user-response.model';
+import { UserResponse } from '@/web-api/xcutting';
 
 export class UserPresenter {
     static of(user: User): UserResponse {

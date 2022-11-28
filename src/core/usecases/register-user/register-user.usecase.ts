@@ -1,12 +1,12 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { UniqueConstraintException } from '@/core/exceptions';
 import { User } from '@/core/models';
-import { RegisterUserCommand, RegisterUserGateway } from '@/core/usecases/register-user';
+import { IRegisterUserUseCase, RegisterUserCommand, RegisterUserGateway } from '@/core/usecases/register-user';
 import { GetUserByNameGateway } from '@/core/usecases/xcutting';
 import { IGetDateTimeService } from '@/core/common';
 
 @Injectable()
-export class RegisterUserUseCase {
+export class RegisterUserUseCase implements IRegisterUserUseCase {
     constructor(
         @Inject(GetUserByNameGateway)
         private getUserByNameGateway: GetUserByNameGateway,

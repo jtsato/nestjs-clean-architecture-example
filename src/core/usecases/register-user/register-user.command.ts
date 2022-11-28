@@ -1,5 +1,5 @@
 /* eslint-disable import/no-cycle */
-import { RegisterUserCommandValidator } from './register-user.command.validator';
+import { RegisterUserCommandValidator } from '@/core/usecases/register-user';
 
 export class RegisterUserCommand {
     name: string;
