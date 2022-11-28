@@ -100,11 +100,13 @@ CALL yarn audit --groups dependencies
 
 ECHO.
 ECHO Running test...
-CALL yarn test:coverage
+CALL yarn test:cov
 
 ECHO.
 ECHO Opening code coverage...
-CALL START coverage\lcov-report\functions\index.html
+CALL START coverage\lcov-report\index.html
+
+GOTO end
 
 :mutation
 ECHO.
