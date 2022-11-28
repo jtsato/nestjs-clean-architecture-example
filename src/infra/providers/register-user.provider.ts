@@ -9,8 +9,8 @@ import { RegisterUserGateway } from '@/core/usecases/register-user/register-user
 export class RegisterUserProvider implements RegisterUserGateway {
     constructor(private userRepository: UserRepository) { }
 
-    execute(user: User): Promise<User> {
+    async execute(user: User): Promise<User> {
         const entity: UserEntity = UserMapper.toUserEntity(user);
-        return this.userRepository.save(entity);
+        return UserMapper.toUser(await this.userRepository.save(entity));
     }
 }

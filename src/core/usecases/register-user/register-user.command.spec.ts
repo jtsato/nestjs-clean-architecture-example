@@ -3,40 +3,38 @@ import { ValidationException } from '@/core/exceptions';
 import { RegisterUserCommand } from '@/core/usecases/register-user';
 import { CatchExceptionHelper } from '~/test/helpers';
 
-describe('RegisterUserCommand', () => {
-    describe('constructor()', () => {
-        it('should throw an error when the command has empty parameters', () => {
-            // Arrange
-            const errors = {
-                name: 'validation.user.name.blank',
-                email: 'validation.user.email.blank',
-                password: 'validation.user.password.blank',
-                fullName: 'validation.user.fullname.blank',
-            };
+describe('RegisterUserCommand, constructor()', () => {
+    it('should throw an error when the command has empty parameters', () => {
+        // Arrange
+        const errors = {
+            name: 'validation.user.name.blank',
+            email: 'validation.user.email.blank',
+            password: 'validation.user.password.blank',
+            fullName: 'validation.user.fullname.blank',
+        };
 
-            // Act
-            const exception: ValidationException = CatchExceptionHelper
-                .catch(() => new RegisterUserCommand('', '', '', ''));
+        // Act
+        const exception: ValidationException = CatchExceptionHelper
+            .catch(() => new RegisterUserCommand('', '', '', ''));
 
-            // Assert
-            expect(exception).not.toBeNull();
-            expect(exception.message).toBe('common.validation.alert');
-            expect(exception.Parameters).not.toBeNull();
-            expect(exception.Parameters).toHaveLength(2);
-            expect(exception.Parameters[1]).toEqual(errors);
-        });
+        // Assert
+        expect(exception).not.toBeNull();
+        expect(exception.message).toBe('common.validation.alert');
+        expect(exception.Parameters).not.toBeNull();
+        expect(exception.Parameters).toHaveLength(2);
+        expect(exception.Parameters[1]).toEqual(errors);
+    });
 
-        it('should create command object when the parameters are filled correcly', () => {
-            // Arrange
-            // Act
-            const command: RegisterUserCommand = new RegisterUserCommand('jszero', 'john.smith.zero@xyz.com', 'P@ssw0rd', 'John Smith Zero');
+    it('should create command object when the parameters are filled correcly', () => {
+        // Arrange
+        // Act
+        const command: RegisterUserCommand = new RegisterUserCommand('jszero', 'john.smith.zero@xyz.com', 'P@ssw0rd', 'John Smith Zero');
 
-            // Assert
-            expect(command).not.toBeNull();
-            expect(command.name).toBe('jszero');
-            expect(command.email).toBe('john.smith.zero@xyz.com');
-            expect(command.password).toBe('P@ssw0rd');
-            expect(command.fullName).toBe('John Smith Zero');
-        });
+        // Assert
+        expect(command).not.toBeNull();
+        expect(command.name).toBe('jszero');
+        expect(command.email).toBe('john.smith.zero@xyz.com');
+        expect(command.password).toBe('P@ssw0rd');
+        expect(command.fullName).toBe('John Smith Zero');
     });
 });

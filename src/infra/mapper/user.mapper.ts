@@ -3,7 +3,6 @@ import { UserEntity } from '@/infra/models';
 
 export class UserMapper {
     public static toUserEntity(user: User): UserEntity {
-        if (!user) { return null; }
         return new UserEntity(
             user.id,
             user.name,

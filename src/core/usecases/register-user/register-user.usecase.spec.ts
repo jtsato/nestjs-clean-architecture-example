@@ -60,7 +60,6 @@ describe('RegisterUserUseCase', () => {
 
             registerUserGatewayMock
                 .execute
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-call
                 .calledWith(dataObjectMatcher(new User(
                     null,
                     'jszero',
