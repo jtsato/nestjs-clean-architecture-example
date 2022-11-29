@@ -1,7 +1,7 @@
 /* eslint-disable sonarjs/no-duplicate-string */
 import { Test, TestingModule } from '@nestjs/testing';
 import { MockProxy, mock, mockReset } from 'jest-mock-extended';
-import { NotFoundException } from '@/core/exceptions';
+import { NotFoundException, ValidationException } from '@/core/exceptions';
 import { GetUserByNameQuery, IGetUserByNameUseCase } from '@/core/usecases/get-user-by-name';
 import { GetUserByNameController } from '@/web-api/entrypoints/get-user-by-name';
 import { UserResponse } from '@/web-api/xcutting';
@@ -29,7 +29,7 @@ describe('GetUserByNameController', () => {
     });
 
     describe('execute()', () => {
-        it('should return user response when user is registered', async () => {
+        it('should return 200 Success with Body when user is registered', async () => {
             // Arrange
             usecase
                 .execute
@@ -62,7 +62,7 @@ describe('GetUserByNameController', () => {
             expect(JSON.stringify(user)).toBe(JSON.stringify(expected));
         });
 
-        it('should throw NotFoundException when user is not registered', async () => {
+        it('should return 404 NotFound when user is not registered', async () => {
             // Arrange
             usecase
                 .execute
@@ -78,6 +78,25 @@ describe('GetUserByNameController', () => {
             expect(exception.Parameters).not.toBeNull();
             expect(exception.Parameters).toHaveLength(1);
             expect(exception.Parameters[0]).toBe('unknown');
+        });
+
+        it('should return 400 BadRequest when query parameter is empty', async () => {
+            // Arrange
+            usecase
+                .execute
+                .calledWith(dataObjectMatcher({ name: '' }))
+                .mockRejectedValue(new ValidationException('common.validation.alert', [{ name: '' }, { name: 'validation.user.name.blank' }]));
+
+            // Act
+            const exception: ValidationException = await CatchExceptionHelper.catchAsync(() => controller.execute(''));
+
+            // Assert
+            expect(exception).not.toBeNull();
+            expect(exception.message).toBe('common.validation.alert');
+            expect(exception.Parameters).not.toBeNull();
+            expect(exception.Parameters).toHaveLength(2);
+            expect(exception.Parameters[0]).toEqual({ name: '' });
+            expect(exception.Parameters[1]).toEqual({ name: 'validation.user.name.blank' });
         });
     });
 });

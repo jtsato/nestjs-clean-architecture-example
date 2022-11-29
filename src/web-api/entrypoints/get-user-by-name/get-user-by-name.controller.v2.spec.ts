@@ -19,7 +19,8 @@ describe('GetUserByNameController', () => {
 
         const moduleRef = await Test.createTestingModule({
             imports: [GetUserByNameModule],
-        }).overrideProvider(IGetUserByNameUseCase)
+        })
+            .overrideProvider(IGetUserByNameUseCase)
             .useValue(usecase)
             .compile();
 
@@ -29,7 +30,7 @@ describe('GetUserByNameController', () => {
 
     describe('execute()', () => {
         // eslint-disable-next-line jest/expect-expect
-        it('should return the user when user is registered', async () => {
+        it('should return 200 Success when user is registered', async () => {
             // Arrange
             usecase
                 .execute
@@ -60,7 +61,7 @@ describe('GetUserByNameController', () => {
         });
 
         // eslint-disable-next-line jest/expect-expect
-        it('should throw NotFoundException when user is not registered', async () => {
+        it('should return 404 NotFound when user is not registered', async () => {
             // Arrange
             usecase
                 .execute
@@ -81,7 +82,7 @@ describe('GetUserByNameController', () => {
         });
 
         // eslint-disable-next-line jest/expect-expect
-        it('should throw ValidationException when query parameter is empty', async () => {
+        it('should return 400 BadRequest when query parameter is empty', async () => {
             // Arrange
             usecase
                 .execute
