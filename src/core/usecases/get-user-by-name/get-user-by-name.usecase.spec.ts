@@ -5,19 +5,18 @@ import { CatchExceptionHelper } from '~/test/helpers';
 import { GetUserByNameGateway } from '@/core/usecases/xcutting';
 import { IGetUserByNameUseCase, GetUserByNameQuery, GetUserByNameUseCase } from '@/core/usecases/get-user-by-name';
 
-const getUserByNameGatewayMock: MockProxy<GetUserByNameGateway> = mock<GetUserByNameGateway>();
-
-const usecase: IGetUserByNameUseCase = new GetUserByNameUseCase(getUserByNameGatewayMock);
+const gateway: MockProxy<GetUserByNameGateway> = mock<GetUserByNameGateway>();
+const usecase: IGetUserByNameUseCase = new GetUserByNameUseCase(gateway);
 
 describe('GetUserByNameUseCase', () => {
     beforeEach(() => {
-        mockReset(getUserByNameGatewayMock);
+        mockReset(gateway);
     });
 
     describe('execute()', () => {
         it('should throw an error when the user is not found', async () => {
             // Arrange
-            getUserByNameGatewayMock
+            gateway
                 .execute
                 .calledWith('jszero')
                 .mockResolvedValue(null);
@@ -37,7 +36,7 @@ describe('GetUserByNameUseCase', () => {
 
         it('should return the user when the user is found', async () => {
             // Arrange
-            getUserByNameGatewayMock
+            gateway
                 .execute
                 .calledWith('jszero')
                 .mockResolvedValue(new User(
