@@ -20,6 +20,17 @@ POST http://localhost:3000/users
 Content-Type: application/json
 
 {
+  "name": "jdzero",
+  "email": "joe.doe.zero@xyz.com",
+  "password": "P@ssw0rd",
+  "fullname": "Joe Doe"
+}
+
+###
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
   "name": "",
   "email": "wrong.email.com",
   "password": "",

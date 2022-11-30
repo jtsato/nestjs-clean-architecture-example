@@ -1,10 +1,12 @@
 import { IsEmail, IsNotEmpty } from 'class-validator';
-import { IsUserNameUnique } from '@/web-api/entrypoints/register-user';
+// import { IsUserNameUnique } from '@/web-api/entrypoints/register-user';
 
 export class RegisterUserRequest {
+    /*
     @IsUserNameUnique({
         message: 'User name already exists',
     })
+    */
     @IsNotEmpty({ message: 'Name is required' })
     name: string;
 

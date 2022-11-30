@@ -3,7 +3,7 @@ import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
 import { GetUserByNameUseCase } from '@/core/usecases/get-user-by-name';
 import { RegisterUserUseCase, RegisterUserGateway } from '@/core/usecases/register-user';
 import { GetUserByNameModule } from '@/web-api/entrypoints/get-user-by-name';
-import { IsUsernameUniqueConstraint, RegisterUserController } from '@/web-api/entrypoints/register-user';
+import { RegisterUserController } from '@/web-api/entrypoints/register-user';
 import { GetUserByNameProvider, RegisterUserProvider } from '@/infra/providers';
 import { GetUserByNameGateway } from '@/core/usecases/xcutting';
 import { UserRepository } from '@/infra/repositories';
@@ -25,7 +25,7 @@ import { ResponseTransformerInterceptor, StopwatchInterceptor } from '@/web-api/
             provide: GetUserByNameGateway,
             useClass: GetUserByNameProvider,
         },
-        IsUsernameUniqueConstraint,
+        // IsUsernameUniqueConstraint,
         RegisterUserUseCase,
         {
             provide: IRegisterUserUseCase,
@@ -49,6 +49,11 @@ import { ResponseTransformerInterceptor, StopwatchInterceptor } from '@/web-api/
             provide: APP_INTERCEPTOR,
             scope: Scope.REQUEST,
             useClass: ResponseTransformerInterceptor,
+        },
+        {
+            provide: APP_INTERCEPTOR,
+            scope: Scope.REQUEST,
+            useClass: StopwatchInterceptor,
         },
         UserRepository,
     ],
