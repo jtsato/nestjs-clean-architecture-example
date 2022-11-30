@@ -5,13 +5,9 @@ export class UserRepository {
 
     public save(user: User): Promise<User> {
         const nextId = UserRepository.users.length + 1;
-        UserRepository.users.push(
-            {
-                id: nextId,
-                ...user,
-            },
-        );
-        return Promise.resolve(user);
+        const userWithId = new User(nextId, user.name, user.email, user.password, user.fullname, user.createdAt);
+        UserRepository.users.push(userWithId);
+        return Promise.resolve(userWithId);
     }
 
     public findByName(name: string): Promise<User> {

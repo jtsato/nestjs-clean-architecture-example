@@ -4,7 +4,7 @@ import { CatchExceptionHelper, dataObjectMatcher } from '~/test/helpers';
 import { IRegisterUserUseCase, RegisterUserCommand, RegisterUserGateway, RegisterUserUseCase } from '@/core/usecases/register-user';
 import { User } from '@/core/models';
 import { GetUserByNameGateway } from '@/core/usecases/xcutting';
-import { IGetDateTimeService } from '@/core/common';
+import { IGetDateTimeService } from '@/core/commons';
 import { UniqueConstraintException } from '@/core/exceptions';
 
 const getUserByNameGatewayMock: MockProxy<GetUserByNameGateway> = mock<GetUserByNameGateway>();

@@ -1,4 +1,4 @@
-import { Controller, Post, Header, Body, HttpStatus, Inject, UseFilters } from '@nestjs/common';
+import { Controller, Post, Header, Body, HttpStatus, Inject } from '@nestjs/common';
 import { HttpResponse, HttpResponseBuilder } from '@/web-api/commons/models';
 import { RegisterUserRequest } from '@/web-api/entrypoints/register-user';
 import { UserPresenter } from '@/web-api/xcutting';

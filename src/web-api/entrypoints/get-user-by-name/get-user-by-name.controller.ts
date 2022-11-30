@@ -1,4 +1,4 @@
-import { Controller, Get, Header, Inject, Query, UseFilters } from '@nestjs/common';
+import { Controller, Get, Header, Inject, Query } from '@nestjs/common';
 import { User } from '@/core/models';
 import { GetUserByNameQuery, IGetUserByNameUseCase } from '@/core/usecases/get-user-by-name';
 import { UserPresenter, UserResponse } from '@/web-api/xcutting';

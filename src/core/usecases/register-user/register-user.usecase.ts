@@ -3,7 +3,7 @@ import { UniqueConstraintException } from '@/core/exceptions';
 import { User } from '@/core/models';
 import { IRegisterUserUseCase, RegisterUserCommand, RegisterUserGateway } from '@/core/usecases/register-user';
 import { GetUserByNameGateway } from '@/core/usecases/xcutting';
-import { IGetDateTimeService } from '@/core/common';
+import { IGetDateTimeService } from '@/core/commons';
 
 @Injectable()
 export class RegisterUserUseCase implements IRegisterUserUseCase {
