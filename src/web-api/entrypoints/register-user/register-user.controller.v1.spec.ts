@@ -30,6 +30,81 @@ describe('RegisterUserController', () => {
         controller = app.get<RegisterUserController>(RegisterUserController);
     });
 
+    it('should return 400 BadRequest when request parameter is invalid', async () => {
+        // Arrange
+        usecase
+            .execute
+            .calledWith(dataObjectMatcher(
+                {
+                    name: '',
+                    email: '',
+                    password: '',
+                    fullname: '',
+                },
+            ))
+            .mockRejectedValue(new ValidationException(
+                'common.validation.alert',
+                [
+                    {
+                        name: '',
+                        email: '',
+                        password: '',
+                        fullname: '',
+                    },
+                    {
+                        name: 'validation.user.name.blank',
+                        email: 'validation.user.email.blank',
+                        password: 'validation.user.password.blank',
+                        fullname: 'validation.user.fullname.blank',
+                    },
+
+                ],
+            ));
+
+        // Act
+        const exception: ValidationException = await CatchExceptionHelper
+            .catchAsync(() => controller.execute(new RegisterUserRequest('', '', '', '')));
+
+        // Assert
+        expect(exception).not.toBeNull();
+        expect(exception.message).toBe('common.validation.alert');
+        expect(exception.Parameters).not.toBeNull();
+        expect(exception.Parameters.length).toBe(2);
+        expect(exception.Parameters[0]).toEqual({ email: '', fullname: '', name: '', password: '' });
+        expect(exception.Parameters[1]).toEqual(
+            {
+                email: 'validation.user.email.blank',
+                fullname: 'validation.user.fullname.blank',
+                name: 'validation.user.name.blank',
+                password: 'validation.user.password.blank',
+            },
+        );
+    });
+
+    it('should return 400 BadRequest when user is already registered', async () => {
+        // Arrange
+        usecase
+            .execute
+            .calledWith(dataObjectMatcher(new RegisterUserCommand(
+                'jszero',
+                'john.smith.zero@xyz.com',
+                'P@ssw0rd',
+                'John Smith Zero',
+            )))
+            .mockRejectedValue(new ValidationException('validation.user.name.duplicated {}', ['jszero']));
+
+        // Act
+        const exception: ValidationException = await CatchExceptionHelper
+            .catchAsync(() => controller.execute(new RegisterUserRequest('jszero', 'john.smith.zero@xyz.com', 'P@ssw0rd', 'John Smith Zero')));
+
+        // Assert
+        expect(exception).not.toBeNull();
+        expect(exception.message).toBe('validation.user.name.duplicated {}');
+        expect(exception.Parameters).not.toBeNull();
+        expect(exception.Parameters.length).toBe(1);
+        expect(exception.Parameters[0]).toEqual('jszero');
+    });
+
     describe('execute()', () => {
         it('should return 201 Created with Body when the user is successfully registered', async () => {
             // Arrange
@@ -71,62 +146,11 @@ describe('RegisterUserController', () => {
                 name: 'jszero',
                 email: 'john.smith.zero@xyz.com',
                 password: 'P@ssw0rd',
-                fullName: 'John Smith Zero',
+                fullname: 'John Smith Zero',
                 createdAt: '2022-12-27 00:00:00',
             };
 
             expect(JSON.stringify(user)).toBe(JSON.stringify(expected));
-        });
-
-        it('should return 400 BadRequest when request parameter is invalid', async () => {
-            // Arrange
-            usecase
-                .execute
-                .calledWith(dataObjectMatcher(
-                    {
-                        name: '',
-                        email: '',
-                        password: '',
-                        fullName: '',
-                    },
-                ))
-                .mockRejectedValue(new ValidationException(
-                    'common.validation.alert',
-                    [
-                        {
-                            name: '',
-                            email: '',
-                            password: '',
-                            fullName: '',
-                        },
-                        {
-                            name: 'validation.user.name.blank',
-                            email: 'validation.user.email.blank',
-                            password: 'validation.user.password.blank',
-                            fullName: 'validation.user.fullName.blank',
-                        },
-
-                    ],
-                ));
-
-            // Act
-            const exception: ValidationException = await CatchExceptionHelper
-                .catchAsync(() => controller.execute(new RegisterUserRequest('', '', '', '')));
-
-            // Assert
-            expect(exception).not.toBeNull();
-            expect(exception.message).toBe('common.validation.alert');
-            expect(exception.Parameters).not.toBeNull();
-            expect(exception.Parameters.length).toBe(2);
-            expect(exception.Parameters[0]).toEqual({ email: '', fullName: '', name: '', password: '' });
-            expect(exception.Parameters[1]).toEqual(
-                {
-                    email: 'validation.user.email.blank',
-                    fullName: 'validation.user.fullname.blank',
-                    name: 'validation.user.name.blank',
-                    password: 'validation.user.password.blank',
-                },
-            );
         });
     });
 });

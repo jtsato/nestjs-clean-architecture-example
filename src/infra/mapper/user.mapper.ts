@@ -8,7 +8,7 @@ export class UserMapper {
             user.name,
             user.email,
             user.password,
-            user.fullName,
+            user.fullname,
             user.createdAt,
         );
     }
@@ -20,7 +20,7 @@ export class UserMapper {
             userEntity.name,
             userEntity.email,
             userEntity.password,
-            userEntity.fullName,
+            userEntity.fullname,
             userEntity.createdAt,
         );
     }

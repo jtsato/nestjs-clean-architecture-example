@@ -17,7 +17,7 @@ export class RegisterUserController {
             registerUserRequest.name,
             registerUserRequest.email,
             registerUserRequest.password,
-            registerUserRequest.fullName,
+            registerUserRequest.fullname,
         );
 
         const user: User = await this.registerUserUseCase.execute(command);

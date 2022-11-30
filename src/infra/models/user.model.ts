@@ -3,7 +3,7 @@ export class UserEntity {
     name: string;
     email: string;
     password: string;
-    fullName: string;
+    fullname: string;
     createdAt: Date;
 
     constructor(
@@ -11,14 +11,14 @@ export class UserEntity {
         name: string,
         email: string,
         password: string,
-        fullName: string,
+        fullname: string,
         createdAt: Date,
     ) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
-        this.fullName = fullName;
+        this.fullname = fullname;
         this.createdAt = createdAt;
     }
 }

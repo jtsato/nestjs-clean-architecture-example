@@ -12,7 +12,7 @@ Content-Type: application/json
   "name": "jszero",
   "email": "john.smith.zero@xyz.com",
   "password": "P@ssw0rd",
-  "fullName": "John Smith"
+  "fullname": "John Smith"
 }
 
 ###

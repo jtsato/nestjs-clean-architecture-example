@@ -23,7 +23,7 @@ export class RegisterUserUseCase implements IRegisterUserUseCase {
             command.name,
             command.email,
             command.password,
-            command.fullName,
+            command.fullname,
             this.getDateTimeService.now(),
         );
 

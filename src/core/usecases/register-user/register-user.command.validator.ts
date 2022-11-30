@@ -30,7 +30,7 @@ export class RegisterUserCommandValidator extends Validator<RegisterUserCommand>
             .notEmpty()
             .withMessage('validation.user.password.blank');
 
-        this.ruleFor('fullName')
+        this.ruleFor('fullname')
             .notNull()
             .withMessage('validation.user.fullname.blank')
             .notEmpty()

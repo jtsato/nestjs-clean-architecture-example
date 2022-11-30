@@ -8,7 +8,7 @@ export class UserPresenter {
             user.name,
             user.email,
             user.password,
-            user.fullName,
+            user.fullname,
             this.toLocalISOString(user.createdAt),
         );
     }

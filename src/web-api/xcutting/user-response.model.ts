@@ -7,7 +7,7 @@ export class UserResponse {
     @Exclude({ toPlainOnly: true })
     password: string;
     @Expose({ name: 'fullname' })
-    fullName: string;
+    fullname: string;
     createdAt: string;
 
     constructor(
@@ -15,14 +15,14 @@ export class UserResponse {
         name: string,
         email: string,
         password: string,
-        fullName: string,
+        fullname: string,
         createdAt: string,
     ) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
-        this.fullName = fullName;
+        this.fullname = fullname;
         this.createdAt = createdAt;
     }
 }

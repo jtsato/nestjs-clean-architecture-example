@@ -55,7 +55,7 @@ describe('GetUserByNameController', () => {
                 name: 'jszero',
                 email: 'john.smith.zero@xyz.com',
                 password: 'P@ssw0rd',
-                fullName: 'John Smith Zero',
+                fullname: 'John Smith Zero',
                 createdAt: '2022-12-27 00:00:00',
             };
 

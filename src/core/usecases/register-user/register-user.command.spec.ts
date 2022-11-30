@@ -10,7 +10,7 @@ describe('RegisterUserCommand, constructor()', () => {
             name: 'validation.user.name.blank',
             email: 'validation.user.email.blank',
             password: 'validation.user.password.blank',
-            fullName: 'validation.user.fullname.blank',
+            fullname: 'validation.user.fullname.blank',
         };
 
         // Act
@@ -35,6 +35,6 @@ describe('RegisterUserCommand, constructor()', () => {
         expect(command.name).toBe('jszero');
         expect(command.email).toBe('john.smith.zero@xyz.com');
         expect(command.password).toBe('P@ssw0rd');
-        expect(command.fullName).toBe('John Smith Zero');
+        expect(command.fullname).toBe('John Smith Zero');
     });
 });

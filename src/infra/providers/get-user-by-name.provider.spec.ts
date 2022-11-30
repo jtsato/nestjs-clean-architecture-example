@@ -37,7 +37,7 @@ describe('GetUserByNameProvider, execute()', () => {
         expect(user.name).toBe('jszero');
         expect(user.email).toBe('john.smith.zero@xyz.com');
         expect(user.password).toBe('P@ssw0rd');
-        expect(user.fullName).toBe('John Smith Zero');
+        expect(user.fullname).toBe('John Smith Zero');
         expect(user.createdAt).toBeInstanceOf(Date);
         expect(user.createdAt).toEqual(new Date(2022, 11, 27, 0, 0, 0));
     });
