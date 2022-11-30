@@ -7,7 +7,7 @@ import { dataObjectMatcher } from '~/test/helpers';
 import { User } from '@/core/models';
 import { IRegisterUserUseCase, RegisterUserCommand } from '@/core/usecases/register-user';
 import { CoreException, UniqueConstraintException, ValidationException } from '@/core/exceptions';
-import { RegisterUserModule } from './register-user.module';
+import { RegisterUserModule } from '@/web-api/entrypoints/register-user/register-user.module';
 
 const usecase: MockProxy<IRegisterUserUseCase> = mock<IRegisterUserUseCase>();
 

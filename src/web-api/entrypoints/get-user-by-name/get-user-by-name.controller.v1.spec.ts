@@ -1,12 +1,12 @@
 /* eslint-disable sonarjs/no-duplicate-string */
 import { Test, TestingModule } from '@nestjs/testing';
 import { MockProxy, mock, mockReset } from 'jest-mock-extended';
-import { NotFoundException, ValidationException } from '@/core/exceptions';
-import { GetUserByNameQuery, IGetUserByNameUseCase } from '@/core/usecases/get-user-by-name';
-import { GetUserByNameController } from '@/web-api/entrypoints/get-user-by-name';
-import { UserResponse } from '@/web-api/xcutting';
 import { CatchExceptionHelper, dataObjectMatcher } from '~/test/helpers';
+import { UserResponse } from '@/web-api/xcutting';
+import { GetUserByNameController } from '@/web-api/entrypoints/get-user-by-name';
+import { NotFoundException, ValidationException } from '@/core/exceptions';
 import { User } from '@/core/models';
+import { IGetUserByNameUseCase, GetUserByNameQuery } from '@/core/usecases/get-user-by-name';
 
 const usecase: MockProxy<IGetUserByNameUseCase> = mock<IGetUserByNameUseCase>();
 

@@ -2,13 +2,12 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { MockProxy, mock, mockReset } from 'jest-mock-extended';
 import { CatchExceptionHelper, dataObjectMatcher } from '~/test/helpers';
+import { HttpResponse } from '@/web-api/commons/models';
+import { UserResponse } from '@/web-api/xcutting';
+import { RegisterUserController, RegisterUserRequest } from '@/web-api/entrypoints/register-user';
+import { ValidationException } from '@/core/exceptions';
 import { User } from '@/core/models';
 import { IRegisterUserUseCase, RegisterUserCommand } from '@/core/usecases/register-user';
-import { RegisterUserController } from './register-user.controller';
-import { RegisterUserRequest } from './register-user-request.model';
-import { UserResponse } from '@/web-api/xcutting';
-import { HttpResponse } from '@/web-api/commons/models';
-import { ValidationException } from '@/core/exceptions';
 
 const usecase: MockProxy<IRegisterUserUseCase> = mock<IRegisterUserUseCase>();
 
