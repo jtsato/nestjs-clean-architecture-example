@@ -1,10 +1,10 @@
 {
-    "name": "api-nest",
+    "name": "nestjs-clean-architecture-example",
     "version": "0.0.1",
-    "description": "",
-    "author": "",
-    "private": true,
-    "license": "UNLICENSED",
+    "description": "NestJS Clean Architecture Example",
+    "author": "Jorge Takeshi Sato",
+    "private": false,
+    "license": "Apache-2.0",
     "scripts": {
         "prebuild": "rimraf dist",
         "build": "nest build",
