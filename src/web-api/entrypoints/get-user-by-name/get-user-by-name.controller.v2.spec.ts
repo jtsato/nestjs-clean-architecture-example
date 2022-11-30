@@ -1,4 +1,5 @@
 /* eslint-disable sonarjs/no-duplicate-string */
+/* eslint-disable jest/expect-expect */
 import * as request from 'supertest';
 import { Test } from '@nestjs/testing';
 import { MockProxy, mock, mockReset } from 'jest-mock-extended';
@@ -29,7 +30,6 @@ describe('GetUserByNameController', () => {
     });
 
     describe('execute()', () => {
-        // eslint-disable-next-line jest/expect-expect
         it('should return 200 Success when user is registered', async () => {
             // Arrange
             usecase
@@ -60,7 +60,6 @@ describe('GetUserByNameController', () => {
                 });
         });
 
-        // eslint-disable-next-line jest/expect-expect
         it('should return 404 NotFound when user is not registered', async () => {
             // Arrange
             usecase
@@ -81,7 +80,6 @@ describe('GetUserByNameController', () => {
                 });
         });
 
-        // eslint-disable-next-line jest/expect-expect
         it('should return 400 BadRequest when query parameter is empty', async () => {
             // Arrange
             usecase

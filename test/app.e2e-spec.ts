@@ -1,3 +1,4 @@
+/* eslint-disable jest/expect-expect */
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
@@ -15,13 +16,11 @@ describe('AppController (e2e)', () => {
         await app.init();
     });
 
-    // eslint-disable-next-line jest/expect-expect
     it('/health-check/live (GET)', () => request(app.getHttpServer())
         .get('/health-check/live')
         .expect(200)
         .expect('UP'));
 
-    // eslint-disable-next-line jest/expect-expect
     it('/health-check/ready (GET)', () => request(app.getHttpServer())
         .get('/health-check/ready')
         .expect(200)

@@ -17,4 +17,11 @@ export class RegisterUserRequest {
 
     @IsNotEmpty({ message: 'Full name is required' })
     fullName: string;
+
+    constructor(name: string, email: string, password: string, fullName: string) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.fullName = fullName;
+    }
 }

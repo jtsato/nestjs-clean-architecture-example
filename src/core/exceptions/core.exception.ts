@@ -1,6 +1,4 @@
-import { BadRequestException } from '@nestjs/common';
-
-export class CoreException extends BadRequestException implements Error {
+export class CoreException implements Error {
     name: string;
     message: string;
     stack?: string;
@@ -8,7 +6,6 @@ export class CoreException extends BadRequestException implements Error {
     public Parameters: any[];
 
     constructor(message: string, parameters: any[]) {
-        super(message);
         this.message = message;
         this.Parameters = parameters;
     }
