@@ -15,7 +15,7 @@ export class GlobalExceptionFilter implements ExceptionFilter {
         const context = host.switchToHttp();
         const response = context.getResponse<Response>();
         const status: number = HttpStatus.INTERNAL_SERVER_ERROR;
-        const body: ResponseStatus = new ResponseStatus(status, exception.message, []);
+        const body: ResponseStatus = new ResponseStatus(status, 'common.unexpected.exception', []);
         this.logger.error(JSON.stringify(body));
         this.httpAdapter.reply(response, body, status);
     }

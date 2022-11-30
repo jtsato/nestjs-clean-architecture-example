@@ -4,7 +4,7 @@ import * as request from 'supertest';
 import { Test } from '@nestjs/testing';
 import { MockProxy, mock, mockReset } from 'jest-mock-extended';
 import { HttpStatus, INestApplication } from '@nestjs/common';
-import { NotFoundException, ValidationException } from '@/core/exceptions';
+import { CoreException, NotFoundException, ValidationException } from '@/core/exceptions';
 import { GetUserByNameQuery, IGetUserByNameUseCase } from '@/core/usecases/get-user-by-name';
 import { GetUserByNameModule } from '@/web-api/entrypoints/get-user-by-name';
 import { User } from '@/core/models';
@@ -29,16 +29,37 @@ describe('GET /users/by-name', () => {
         await app.init();
     });
 
+    it('should return 500 Internal Server Error when an unexpected error occurs', async () => {
+        // Arrange
+        usecase
+            .execute
+            .calledWith(dataObjectMatcher({ name: 'jszero' }))
+            .mockRejectedValue(new CoreException('common.unexpected.exception', []));
+
+        // Act
+        const response = await request(app.getHttpServer())
+            .get('/users/by-name?name=jszero');
+
+        // Assert
+        expect(response.status).toBe(HttpStatus.INTERNAL_SERVER_ERROR);
+        expect(response.header).toHaveProperty('content-type', 'application/json; charset=utf-8');
+        expect(response.body).toEqual({
+            code: 500,
+            message: 'common.unexpected.exception',
+            fields: [],
+        });
+    });
+
     it('should return 400 BadRequest when query parameter is empty', async () => {
         // Arrange
         usecase
             .execute
-            .calledWith(dataObjectMatcher(new GetUserByNameQuery('unknown')))
+            .calledWith(dataObjectMatcher({ name: '' }))
             .mockRejectedValue(new ValidationException('common.validation.alert', [{ name: '' }, { name: 'validation.user.name.blank' }]));
 
         // Act
         const response = await request(app.getHttpServer())
-            .get('/users/by-name?name=unknown');
+            .get('/users/by-name?name=');
 
         // Assert
         expect(response.status).toBe(HttpStatus.BAD_REQUEST);
@@ -56,19 +77,19 @@ describe('GET /users/by-name', () => {
         // Arrange
         usecase
             .execute
-            .calledWith(dataObjectMatcher(new GetUserByNameQuery('unknown')))
-            .mockRejectedValue(new NotFoundException('validation.user.name.not.found {}', ['unknown']));
+            .calledWith(dataObjectMatcher(new GetUserByNameQuery('jszero')))
+            .mockRejectedValue(new NotFoundException('validation.user.name.not.found {}', ['jszero']));
 
         // Act
         const response = await request(app.getHttpServer())
-            .get('/users/by-name?name=unknown');
+            .get('/users/by-name?name=jszero');
 
         // Assert
         expect(response.status).toBe(HttpStatus.NOT_FOUND);
         expect(response.header).toHaveProperty('content-type', 'application/json; charset=utf-8');
         expect(response.body).toEqual({
             code: 404,
-            message: 'validation.user.name.not.found unknown',
+            message: 'validation.user.name.not.found jszero',
             fields: [],
         });
     });

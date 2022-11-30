@@ -6,7 +6,7 @@ import { HttpStatus, INestApplication } from '@nestjs/common';
 import { dataObjectMatcher } from '~/test/helpers';
 import { User } from '@/core/models';
 import { IRegisterUserUseCase, RegisterUserCommand } from '@/core/usecases/register-user';
-import { UniqueConstraintException, ValidationException } from '@/core/exceptions';
+import { CoreException, UniqueConstraintException, ValidationException } from '@/core/exceptions';
 import { RegisterUserModule } from './register-user.module';
 
 const usecase: MockProxy<IRegisterUserUseCase> = mock<IRegisterUserUseCase>();
@@ -26,6 +26,40 @@ describe('POST /users', () => {
 
         app = moduleRef.createNestApplication();
         await app.init();
+    });
+
+    it('should return 500 Internal Server Error when an unexpected error occurs', async () => {
+        // Arrange
+        usecase
+            .execute
+            .calledWith(dataObjectMatcher(new RegisterUserCommand(
+                'jszero',
+                'john.smith.zero@xyz.com',
+                'P@ssw0rd',
+                'John Smith Zero',
+            )))
+            .mockRejectedValue(new CoreException('common.unexpected.exception', []));
+
+        // Act
+        const response = await request(app.getHttpServer())
+            .post('/users')
+            .send(
+                {
+                    name: 'jszero',
+                    email: 'john.smith.zero@xyz.com',
+                    password: 'P@ssw0rd',
+                    fullname: 'John Smith Zero',
+                },
+            );
+
+        // Assert
+        expect(response.status).toBe(HttpStatus.INTERNAL_SERVER_ERROR);
+        expect(response.header).toHaveProperty('content-type', 'application/json; charset=utf-8');
+        expect(response.body).toEqual({
+            code: 500,
+            message: 'common.unexpected.exception',
+            fields: [],
+        });
     });
 
     it('should return 400 BadRequest when request parameter is invalid', async () => {

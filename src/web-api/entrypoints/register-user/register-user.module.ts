@@ -1,6 +1,4 @@
 import { Module, Scope } from '@nestjs/common';
-import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
-import { GetUserByNameUseCase } from '@/core/usecases/get-user-by-name';
 import { RegisterUserUseCase, RegisterUserGateway } from '@/core/usecases/register-user';
 import { GetUserByNameModule } from '@/web-api/entrypoints/get-user-by-name';
 import { RegisterUserController } from '@/web-api/entrypoints/register-user';
@@ -9,24 +7,22 @@ import { GetUserByNameGateway } from '@/core/usecases/xcutting';
 import { UserRepository } from '@/infra/repositories';
 import { IRegisterUserUseCase } from '@/core/usecases/register-user/register-user-usecase.interface';
 import { GetDateTimeService, IGetDateTimeService } from '@/core/common';
-import { UniqueConstraintExceptionFilter, ValidationExceptionFilter } from '@/web-api/commons/filters';
-import { ResponseTransformerInterceptor, StopwatchInterceptor } from '@/web-api/commons/interceptors';
+import { WebModule } from '@/web-api/commons/modules/web-module';
 
 @Module({
-    imports: [GetUserByNameModule],
+    imports: [GetUserByNameModule, WebModule],
     controllers: [RegisterUserController],
     providers: [
+        // IsUsernameUniqueConstraint,
+        UserRepository,
         {
             provide: IGetDateTimeService,
             useClass: GetDateTimeService,
         },
-        GetUserByNameUseCase,
         {
             provide: GetUserByNameGateway,
             useClass: GetUserByNameProvider,
         },
-        // IsUsernameUniqueConstraint,
-        RegisterUserUseCase,
         {
             provide: IRegisterUserUseCase,
             useClass: RegisterUserUseCase,
@@ -35,27 +31,6 @@ import { ResponseTransformerInterceptor, StopwatchInterceptor } from '@/web-api/
             provide: RegisterUserGateway,
             useClass: RegisterUserProvider,
         },
-        {
-            provide: APP_FILTER,
-            scope: Scope.REQUEST,
-            useClass: ValidationExceptionFilter,
-        },
-        {
-            provide: APP_FILTER,
-            scope: Scope.REQUEST,
-            useClass: UniqueConstraintExceptionFilter,
-        },
-        {
-            provide: APP_INTERCEPTOR,
-            scope: Scope.REQUEST,
-            useClass: ResponseTransformerInterceptor,
-        },
-        {
-            provide: APP_INTERCEPTOR,
-            scope: Scope.REQUEST,
-            useClass: StopwatchInterceptor,
-        },
-        UserRepository,
     ],
 })
 
