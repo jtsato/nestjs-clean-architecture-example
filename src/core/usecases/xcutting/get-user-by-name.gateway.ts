@@ -1,8 +1,8 @@
 import { User } from '@/core/models';
 
-export interface GetUserByNameGateway {
+export interface IGetUserByNameGateway {
     execute(name: string): Promise<User>;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
-export const GetUserByNameGateway = Symbol('GetUserByNameGateway');
+export const IGetUserByNameGateway = Symbol('IGetUserByNameGateway');

@@ -16,13 +16,13 @@ describe('AppController', () => {
 
     describe('health-check-live', () => {
         it('should return "UP"', () => {
-            expect(appController.getHealthCheck()).toBe('UP');
+            expect(appController.getHealthCheck()).toEqual({ status: 'UP' });
         });
     });
 
     describe('health-check-ready', () => {
         it('should return "UP"', () => {
-            expect(appController.getReadyCheck()).toBe('UP');
+            expect(appController.getReadyCheck()).toEqual({ status: 'UP' });
         });
     });
 });

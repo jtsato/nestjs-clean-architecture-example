@@ -1,8 +1,8 @@
 import { User } from '@/core/models';
 
-export interface RegisterUserGateway {
+export interface IRegisterUserGateway {
     execute(user: User): Promise<User>;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
-export const RegisterUserGateway = Symbol('RegisterUserGateway');
+export const IRegisterUserGateway = Symbol('IRegisterUserGateway');

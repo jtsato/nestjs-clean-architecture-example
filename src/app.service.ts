@@ -2,11 +2,11 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class AppService {
-    getLive(): string {
-        return JSON.stringify({ status: 'UP' });
+    getLive(): object {
+        return { status: 'UP' };
     }
 
-    getReady(): string {
-        return JSON.stringify({ status: 'UP' });
+    getReady(): object {
+        return { status: 'UP' };
     }
 }

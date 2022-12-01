@@ -1,15 +1,15 @@
 /* eslint-disable sonarjs/no-duplicate-string */
 import { MockProxy, mock, mockReset } from 'jest-mock-extended';
 import { CatchExceptionHelper, dataObjectMatcher } from '~/test/helpers';
-import { IRegisterUserUseCase, RegisterUserCommand, RegisterUserGateway, RegisterUserUseCase } from '@/core/usecases/register-user';
+import { IRegisterUserUseCase, RegisterUserCommand, IRegisterUserGateway, RegisterUserUseCase } from '@/core/usecases/register-user';
 import { User } from '@/core/models';
-import { GetUserByNameGateway } from '@/core/usecases/xcutting';
+import { IGetUserByNameGateway } from '@/core/usecases/xcutting';
 import { IGetDateTimeService } from '@/core/commons';
 import { UniqueConstraintException } from '@/core/exceptions';
 
-const getUserByNameGatewayMock: MockProxy<GetUserByNameGateway> = mock<GetUserByNameGateway>();
+const getUserByNameGatewayMock: MockProxy<IGetUserByNameGateway> = mock<IGetUserByNameGateway>();
 const getDateTimeServiceMock: MockProxy<IGetDateTimeService> = mock<IGetDateTimeService>();
-const registerUserGatewayMock: MockProxy<RegisterUserGateway> = mock<RegisterUserGateway>();
+const registerUserGatewayMock: MockProxy<IRegisterUserGateway> = mock<IRegisterUserGateway>();
 
 const usecase: IRegisterUserUseCase = new RegisterUserUseCase(getUserByNameGatewayMock, getDateTimeServiceMock, registerUserGatewayMock);
 

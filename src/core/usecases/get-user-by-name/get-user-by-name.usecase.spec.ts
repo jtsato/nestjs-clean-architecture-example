@@ -2,10 +2,10 @@ import { MockProxy, mock, mockReset } from 'jest-mock-extended';
 import { NotFoundException } from '@/core/exceptions';
 import { User } from '@/core/models';
 import { CatchExceptionHelper } from '~/test/helpers';
-import { GetUserByNameGateway } from '@/core/usecases/xcutting';
+import { IGetUserByNameGateway } from '@/core/usecases/xcutting';
 import { IGetUserByNameUseCase, GetUserByNameQuery, GetUserByNameUseCase } from '@/core/usecases/get-user-by-name';
 
-const gateway: MockProxy<GetUserByNameGateway> = mock<GetUserByNameGateway>();
+const gateway: MockProxy<IGetUserByNameGateway> = mock<IGetUserByNameGateway>();
 const usecase: IGetUserByNameUseCase = new GetUserByNameUseCase(gateway);
 
 describe('GetUserByNameUseCase', () => {

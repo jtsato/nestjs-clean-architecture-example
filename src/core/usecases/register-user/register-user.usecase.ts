@@ -1,19 +1,19 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { UniqueConstraintException } from '@/core/exceptions';
 import { User } from '@/core/models';
-import { IRegisterUserUseCase, RegisterUserCommand, RegisterUserGateway } from '@/core/usecases/register-user';
-import { GetUserByNameGateway } from '@/core/usecases/xcutting';
+import { IRegisterUserUseCase, RegisterUserCommand, IRegisterUserGateway } from '@/core/usecases/register-user';
+import { IGetUserByNameGateway } from '@/core/usecases/xcutting';
 import { IGetDateTimeService } from '@/core/commons';
 
 @Injectable()
 export class RegisterUserUseCase implements IRegisterUserUseCase {
     constructor(
-        @Inject(GetUserByNameGateway)
-        private getUserByNameGateway: GetUserByNameGateway,
+        @Inject(IGetUserByNameGateway)
+        private getUserByNameGateway: IGetUserByNameGateway,
         @Inject(IGetDateTimeService)
         private getDateTimeService: IGetDateTimeService,
-        @Inject(RegisterUserGateway)
-        private registerUserGateway: RegisterUserGateway,
+        @Inject(IRegisterUserGateway)
+        private registerUserGateway: IRegisterUserGateway,
     ) { }
     async execute(command: RegisterUserCommand): Promise<User> {
         await this.checkDuplicatedName(command.name);

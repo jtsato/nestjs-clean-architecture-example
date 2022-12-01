@@ -3,10 +3,10 @@ import { User } from '@/core/models';
 import { UserRepository } from '@/infra/repositories';
 import { UserEntity } from '@/infra/models';
 import { UserMapper } from '@/infra/mapper';
-import { GetUserByNameGateway } from '@/core/usecases/xcutting';
+import { IGetUserByNameGateway } from '@/core/usecases/xcutting';
 
 @Injectable()
-export class GetUserByNameProvider implements GetUserByNameGateway {
+export class GetUserByNameProvider implements IGetUserByNameGateway {
     constructor(private userRepository: UserRepository) { }
 
     async execute(name: string): Promise<User> {
