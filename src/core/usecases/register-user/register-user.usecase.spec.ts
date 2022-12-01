@@ -16,6 +16,7 @@ const usecase: IRegisterUserUseCase = new RegisterUserUseCase(getUserByNameGatew
 describe('RegisterUserUseCase', () => {
     beforeEach(() => {
         mockReset(getUserByNameGatewayMock);
+        mockReset(getDateTimeServiceMock);
         mockReset(registerUserGatewayMock);
     });
 

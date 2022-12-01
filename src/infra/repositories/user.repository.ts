@@ -5,7 +5,7 @@ export class UserRepository {
 
     public save(user: User): Promise<User> {
         const nextId = UserRepository.users.length + 1;
-        const userWithId = new User(nextId, user.name, user.email, user.password, user.fullname, user.createdAt);
+        const userWithId = { ...user, id: nextId } as User;
         UserRepository.users.push(userWithId);
         return Promise.resolve(userWithId);
     }

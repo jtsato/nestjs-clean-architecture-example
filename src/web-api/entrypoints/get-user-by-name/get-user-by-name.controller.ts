@@ -11,8 +11,8 @@ export class GetUserByNameController {
     @Header('Content-Type', 'application/json')
     @Header('Cache-Control', 'no-cache')
     async execute(@Query('name') name: string): Promise<UserResponse> {
-        const command: GetUserByNameQuery = new GetUserByNameQuery(name);
-        const user: User = await this.getUserByNameUseCase.execute(command);
+        const query: GetUserByNameQuery = new GetUserByNameQuery(name);
+        const user: User = await this.getUserByNameUseCase.execute(query);
         return UserPresenter.of(user);
     }
 }

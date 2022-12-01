@@ -7,7 +7,7 @@ import { GetUserByNameGateway } from '@/core/usecases/xcutting';
 import { UserRepository } from '@/infra/repositories';
 import { IRegisterUserUseCase } from '@/core/usecases/register-user/register-user-usecase.interface';
 import { GetDateTimeService, IGetDateTimeService } from '@/core/commons';
-import { WebModule } from '@/web-api/commons/modules/web-module';
+import { WebModule } from '@/web-api/commons/modules';
 
 @Module({
     imports: [GetUserByNameModule, WebModule],

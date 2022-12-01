@@ -1,6 +1,5 @@
 /* eslint-disable import/no-cycle */
 import { Validator } from 'fluentvalidation-ts';
-import { ValidationErrors } from 'fluentvalidation-ts/dist/ValidationErrors';
 import { ValidationException } from '@/core/exceptions';
 import { RegisterUserCommand } from '@/core/usecases/register-user';
 
@@ -37,7 +36,7 @@ export class RegisterUserCommandValidator extends Validator<RegisterUserCommand>
             .withMessage('validation.user.fullname.blank');
     }
 
-    public static getInstance(): RegisterUserCommandValidator {
+    private static getInstance(): RegisterUserCommandValidator {
         if (!RegisterUserCommandValidator.instance) {
             RegisterUserCommandValidator.instance = new RegisterUserCommandValidator();
         }
@@ -46,7 +45,7 @@ export class RegisterUserCommandValidator extends Validator<RegisterUserCommand>
 
     public static ValidateAndThrow(command: RegisterUserCommand): void {
         const instance = RegisterUserCommandValidator.getInstance();
-        const errors: ValidationErrors<RegisterUserCommand> = instance.validate(command);
+        const errors = instance.validate(command);
         if ((Object.keys(errors).length === 0)) { return; }
         throw new ValidationException('common.validation.alert', [command, errors]);
     }
