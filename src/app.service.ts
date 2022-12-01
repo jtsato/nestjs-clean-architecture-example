@@ -3,10 +3,10 @@ import { Injectable } from '@nestjs/common';
 @Injectable()
 export class AppService {
     getLive(): string {
-        return 'UP';
+        return JSON.stringify({ status: 'UP' });
     }
 
     getReady(): string {
-        return 'UP';
+        return JSON.stringify({ status: 'UP' });
     }
 }

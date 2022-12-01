@@ -19,10 +19,10 @@ describe('AppController (e2e)', () => {
     it('/health-check/live (GET)', () => request(app.getHttpServer())
         .get('/health-check/live')
         .expect(200)
-        .expect('UP'));
+        .expect(JSON.stringify({ status: 'UP' })));
 
     it('/health-check/ready (GET)', () => request(app.getHttpServer())
         .get('/health-check/ready')
         .expect(200)
-        .expect('UP'));
+        .expect(JSON.stringify({ status: 'UP' })));
 });
