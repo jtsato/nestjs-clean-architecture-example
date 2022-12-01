@@ -1,4 +1,4 @@
-import { HttpResponse } from '@/web-api/commons/models';
+import { HttpResponse } from './http-response.model';
 
 export class HttpResponseBuilder {
     private httpResponse: HttpResponse = {

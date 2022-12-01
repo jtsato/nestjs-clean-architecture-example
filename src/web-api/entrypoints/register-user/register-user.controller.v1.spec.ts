@@ -67,10 +67,10 @@ describe('RegisterUserController', () => {
         // Assert
         expect(exception).not.toBeNull();
         expect(exception.message).toBe('common.validation.alert');
-        expect(exception.Parameters).not.toBeNull();
-        expect(exception.Parameters.length).toBe(2);
-        expect(exception.Parameters[0]).toEqual({ email: '', fullname: '', name: '', password: '' });
-        expect(exception.Parameters[1]).toEqual(
+        expect(exception.parameters).not.toBeNull();
+        expect(exception.parameters.length).toBe(2);
+        expect(exception.parameters[0]).toEqual({ email: '', fullname: '', name: '', password: '' });
+        expect(exception.parameters[1]).toEqual(
             {
                 email: 'validation.user.email.blank',
                 fullname: 'validation.user.fullname.blank',
@@ -99,9 +99,9 @@ describe('RegisterUserController', () => {
         // Assert
         expect(exception).not.toBeNull();
         expect(exception.message).toBe('validation.user.name.duplicated {}');
-        expect(exception.Parameters).not.toBeNull();
-        expect(exception.Parameters.length).toBe(1);
-        expect(exception.Parameters[0]).toEqual('jszero');
+        expect(exception.parameters).not.toBeNull();
+        expect(exception.parameters.length).toBe(1);
+        expect(exception.parameters[0]).toEqual('jszero');
     });
 
     describe('execute()', () => {

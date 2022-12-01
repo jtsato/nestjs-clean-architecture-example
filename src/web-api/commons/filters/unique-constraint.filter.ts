@@ -19,7 +19,7 @@ export class UniqueConstraintExceptionFilter implements ExceptionFilter<UniqueCo
 
         // TODO: Use the message as key to get the message from the resource file.
         let { message } = exception;
-        exception.Parameters.forEach((parameter) => {
+        exception.parameters.forEach((parameter) => {
             message = message.replace(/{}/i, parameter as unknown as string);
         });
 

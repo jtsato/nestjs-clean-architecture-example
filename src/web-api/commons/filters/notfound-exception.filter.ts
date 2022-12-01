@@ -16,7 +16,7 @@ export class NotFoundExceptionFilter implements ExceptionFilter<NotFoundExceptio
     catch(exception: NotFoundException, host: ArgumentsHost) {
         const context: HttpArgumentsHost = host.switchToHttp();
         const response = context.getResponse<Response>();
-        const identifier: string = exception.Parameters[0] as unknown as string;
+        const identifier: string = exception.parameters[0] as unknown as string;
         const message = exception.message.replace(/{}/i, identifier);
         const status: number = HttpStatus.NOT_FOUND;
         const body: ResponseStatus = new ResponseStatus(status, message, []);

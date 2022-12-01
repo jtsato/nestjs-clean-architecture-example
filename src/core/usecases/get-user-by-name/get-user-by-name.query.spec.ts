@@ -16,9 +16,9 @@ describe('GetUserByNameQuery, constructor()', () => {
         // Assert
         expect(exception).not.toBeNull();
         expect(exception.message).toBe('common.validation.alert');
-        expect(exception.Parameters).not.toBeNull();
-        expect(exception.Parameters).toHaveLength(2);
-        expect(exception.Parameters[1]).toEqual(errors);
+        expect(exception.parameters).not.toBeNull();
+        expect(exception.parameters).toHaveLength(2);
+        expect(exception.parameters[1]).toEqual(errors);
     });
 
     it('should create query object when the parameters are filled correcly', () => {

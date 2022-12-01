@@ -43,9 +43,9 @@ describe('RegisterUserUseCase', () => {
             // Assert
             expect(exception).not.toBeNull();
             expect(exception.message).toBe('validation.user.name.duplicated {}');
-            expect(exception.Parameters).not.toBeNull();
-            expect(exception.Parameters).toHaveLength(1);
-            expect(exception.Parameters[0]).toBe('jszero');
+            expect(exception.parameters).not.toBeNull();
+            expect(exception.parameters).toHaveLength(1);
+            expect(exception.parameters[0]).toBe('jszero');
         });
 
         it('should run successfully when username is not registered', async () => {

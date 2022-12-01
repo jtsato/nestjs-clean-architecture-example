@@ -75,9 +75,9 @@ describe('GetUserByNameController', () => {
             // Assert
             expect(exception).not.toBeNull();
             expect(exception.message).toBe('validation.user.name.not.found {}');
-            expect(exception.Parameters).not.toBeNull();
-            expect(exception.Parameters).toHaveLength(1);
-            expect(exception.Parameters[0]).toBe('unknown');
+            expect(exception.parameters).not.toBeNull();
+            expect(exception.parameters).toHaveLength(1);
+            expect(exception.parameters[0]).toBe('unknown');
         });
 
         it('should return 400 BadRequest when query parameter is empty', async () => {
@@ -93,10 +93,10 @@ describe('GetUserByNameController', () => {
             // Assert
             expect(exception).not.toBeNull();
             expect(exception.message).toBe('common.validation.alert');
-            expect(exception.Parameters).not.toBeNull();
-            expect(exception.Parameters).toHaveLength(2);
-            expect(exception.Parameters[0]).toEqual({ name: '' });
-            expect(exception.Parameters[1]).toEqual({ name: 'validation.user.name.blank' });
+            expect(exception.parameters).not.toBeNull();
+            expect(exception.parameters).toHaveLength(2);
+            expect(exception.parameters[0]).toEqual({ name: '' });
+            expect(exception.parameters[1]).toEqual({ name: 'validation.user.name.blank' });
         });
     });
 });

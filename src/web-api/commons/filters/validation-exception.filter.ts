@@ -15,8 +15,8 @@ export class ValidationExceptionFilter implements ExceptionFilter<ValidationExce
 
     catch(exception: ValidationException, host: ArgumentsHost) {
         const context: HttpArgumentsHost = host.switchToHttp();
-        const command: object = exception.Parameters[0] as object;
-        const errors: object = exception.Parameters[1] as object;
+        const command: object = exception.parameters[0] as object;
+        const errors: object = exception.parameters[1] as object;
         const fields: Array<Field> = new Array<Field>();
         Object.keys(errors).forEach((key) => {
             const error: string = errors[key] as string;

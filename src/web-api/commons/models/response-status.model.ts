@@ -1,13 +1,5 @@
-import { Field } from '@/web-api/commons/models';
+import { Field } from './field.model';
 
 export class ResponseStatus {
-    code: number;
-    message: string;
-    fields: Array<Field>;
-
-    constructor(code: number, message: string, fields: Array<Field>) {
-        this.code = code;
-        this.message = message;
-        this.fields = fields;
-    }
+    constructor(public code: number, public message: string, public fields: Array<Field>) { }
 }
