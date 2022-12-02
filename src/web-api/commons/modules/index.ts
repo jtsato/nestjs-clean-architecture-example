@@ -1,1 +1,1 @@
-export * from './web-module';
+export * from './common.module';

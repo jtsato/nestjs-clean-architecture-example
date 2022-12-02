@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { User } from '@/core/models';
 import { UserRepository } from '@/infra/repositories';
 import { UserEntity } from '@/infra/models';
-import { UserMapper } from '@/infra/mapper';
+import { UserMapper } from '@/infra/mappers';
 import { IGetUserByNameGateway } from '@/core/usecases/xcutting';
 
 @Injectable()
