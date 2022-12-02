@@ -18,14 +18,14 @@ export class RegisterUserUseCase implements IRegisterUserUseCase {
     async execute(command: RegisterUserCommand): Promise<User> {
         await this.checkDuplicatedName(command.name);
 
-        const user: User = new User(
-            null,
-            command.name,
-            command.email,
-            command.password,
-            command.fullname,
-            this.getDateTimeService.now(),
-        );
+        const user: User = {
+            id: null,
+            name: command.name,
+            email: command.email,
+            password: command.password,
+            fullname: command.fullname,
+            createdAt: this.getDateTimeService.now(),
+        };
 
         return this.registerUserGateway.execute(user);
     }
