@@ -80,7 +80,7 @@
       "/test/",
       "/src/main.ts",
       "/src/app.module.ts",
-      "*.spec.ts"
+      ".spec.ts"
     ],
     "coverageThreshold": {
       "global": {
