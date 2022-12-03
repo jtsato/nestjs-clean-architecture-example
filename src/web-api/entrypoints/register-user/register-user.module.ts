@@ -13,7 +13,6 @@ import { WebModule } from '@/web-api/commons/modules';
     imports: [GetUserByNameModule, WebModule],
     controllers: [RegisterUserController],
     providers: [
-        // IsUsernameUniqueConstraint,
         UserRepository,
         {
             provide: IGetDateTimeSymbol,
