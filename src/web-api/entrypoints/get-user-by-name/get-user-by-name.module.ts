@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 import { GetUserByNameUseCase } from '@/core/usecases/get-user-by-name';
 import { GetUserByNameController } from '@/web-api/entrypoints/get-user-by-name';
-import { IGetUserByNameGateway } from '@/core/usecases/xcutting';
+import { IGetUserByNameGatewaySymbol } from '@/core/usecases/xcutting';
 import { GetUserByNameProvider } from '@/infra/providers';
 import { UserRepository } from '@/infra/repositories';
-import { IGetUserByNameUseCase } from '@/core/usecases/get-user-by-name/get-user-by-name-usecase.interface';
+import { IGetUserByNameUseCaseSymbol } from '@/core/usecases/get-user-by-name/get-user-by-name-usecase.interface';
 import { WebModule } from '@/web-api/commons/modules';
 
 @Module({
@@ -14,15 +14,15 @@ import { WebModule } from '@/web-api/commons/modules';
         UserRepository,
         GetUserByNameProvider,
         {
-            provide: IGetUserByNameUseCase,
+            provide: IGetUserByNameUseCaseSymbol,
             useClass: GetUserByNameUseCase,
         },
         {
-            provide: IGetUserByNameGateway,
+            provide: IGetUserByNameGatewaySymbol,
             useClass: GetUserByNameProvider,
         },
     ],
-    exports: [IGetUserByNameGateway, GetUserByNameProvider],
+    exports: [IGetUserByNameGatewaySymbol, GetUserByNameProvider],
 })
 
 export class GetUserByNameModule {

@@ -1,14 +1,14 @@
 /* eslint-disable sonarjs/no-duplicate-string */
-/* eslint-disable jest/expect-expect */
+
+import { mock, MockProxy, mockReset } from 'jest-mock-extended';
 import * as request from 'supertest';
-import { Test } from '@nestjs/testing';
-import { MockProxy, mock, mockReset } from 'jest-mock-extended';
 import { HttpStatus, INestApplication } from '@nestjs/common';
-import { CoreException, NotFoundException, ValidationException } from '@/core/exceptions';
-import { GetUserByNameQuery, IGetUserByNameUseCase } from '@/core/usecases/get-user-by-name';
-import { GetUserByNameModule } from '@/web-api/entrypoints/get-user-by-name';
-import { User } from '@/core/models';
+import { Test } from '@nestjs/testing';
 import { dataObjectMatcher } from '~/test/helpers';
+import { CoreException, NotFoundException, ValidationException } from '@/core/exceptions';
+import { User } from '@/core/models';
+import { GetUserByNameQuery, IGetUserByNameUseCase, IGetUserByNameUseCaseSymbol } from '@/core/usecases/get-user-by-name';
+import { GetUserByNameModule } from '@/web-api/entrypoints/get-user-by-name';
 
 const usecase: MockProxy<IGetUserByNameUseCase> = mock<IGetUserByNameUseCase>();
 
@@ -21,7 +21,7 @@ describe('GET /users/by-name', () => {
         const moduleRef = await Test.createTestingModule({
             imports: [GetUserByNameModule],
         })
-            .overrideProvider(IGetUserByNameUseCase)
+            .overrideProvider(IGetUserByNameUseCaseSymbol)
             .useValue(usecase)
             .compile();
 

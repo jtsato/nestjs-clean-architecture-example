@@ -5,5 +5,4 @@ export interface IGetUserByNameUseCase {
     execute(query: GetUserByNameQuery): Promise<User>;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-redeclare
-export const IGetUserByNameUseCase = Symbol('IGetUserByNameUseCase');
+export const IGetUserByNameUseCaseSymbol = Symbol('IGetUserByNameUseCase');

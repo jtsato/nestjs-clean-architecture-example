@@ -1,11 +1,11 @@
+import { mock, MockProxy, mockReset } from 'jest-mock-extended';
 /* eslint-disable sonarjs/no-duplicate-string */
 import * as request from 'supertest';
 import { Test } from '@nestjs/testing';
-import { MockProxy, mock, mockReset } from 'jest-mock-extended';
 import { HttpStatus, INestApplication } from '@nestjs/common';
 import { dataObjectMatcher } from '~/test/helpers';
 import { User } from '@/core/models';
-import { IRegisterUserUseCase, RegisterUserCommand } from '@/core/usecases/register-user';
+import { IRegisterUserUseCase, IRegisterUserUseCaseSymbol, RegisterUserCommand } from '@/core/usecases/register-user';
 import { CoreException, UniqueConstraintException, ValidationException } from '@/core/exceptions';
 import { RegisterUserModule } from '@/web-api/entrypoints/register-user/register-user.module';
 
@@ -20,7 +20,7 @@ describe('POST /users', () => {
         const moduleRef = await Test.createTestingModule({
             imports: [RegisterUserModule],
         })
-            .overrideProvider(IRegisterUserUseCase)
+            .overrideProvider(IRegisterUserUseCaseSymbol)
             .useValue(usecase)
             .compile();
 

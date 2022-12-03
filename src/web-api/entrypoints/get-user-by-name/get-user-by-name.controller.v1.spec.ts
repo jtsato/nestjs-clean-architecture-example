@@ -1,12 +1,13 @@
 /* eslint-disable sonarjs/no-duplicate-string */
+
+import { mock, MockProxy, mockReset } from 'jest-mock-extended';
 import { Test, TestingModule } from '@nestjs/testing';
-import { MockProxy, mock, mockReset } from 'jest-mock-extended';
 import { CatchExceptionHelper, dataObjectMatcher } from '~/test/helpers';
 import { UserResponse } from '@/web-api/xcutting';
 import { GetUserByNameController } from '@/web-api/entrypoints/get-user-by-name';
 import { NotFoundException, ValidationException } from '@/core/exceptions';
 import { User } from '@/core/models';
-import { IGetUserByNameUseCase, GetUserByNameQuery } from '@/core/usecases/get-user-by-name';
+import { GetUserByNameQuery, IGetUserByNameUseCase, IGetUserByNameUseCaseSymbol } from '@/core/usecases/get-user-by-name';
 
 const usecase: MockProxy<IGetUserByNameUseCase> = mock<IGetUserByNameUseCase>();
 
@@ -19,7 +20,7 @@ describe('GetUserByNameController', () => {
             controllers: [GetUserByNameController],
             providers: [
                 {
-                    provide: IGetUserByNameUseCase,
+                    provide: IGetUserByNameUseCaseSymbol,
                     useValue: usecase,
                 },
             ],

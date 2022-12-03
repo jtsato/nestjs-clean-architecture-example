@@ -1,7 +1,7 @@
 /* eslint-disable sonarjs/no-duplicate-string */
-import { MockProxy, mock, mockReset } from 'jest-mock-extended';
+import { mock, MockProxy, mockReset } from 'jest-mock-extended';
 import { CatchExceptionHelper, dataObjectMatcher } from '~/test/helpers';
-import { IRegisterUserUseCase, RegisterUserCommand, IRegisterUserGateway, RegisterUserUseCase } from '@/core/usecases/register-user';
+import { IRegisterUserGateway, IRegisterUserUseCase, RegisterUserCommand, RegisterUserUseCase } from '@/core/usecases/register-user';
 import { User } from '@/core/models';
 import { IGetUserByNameGateway } from '@/core/usecases/xcutting';
 import { IGetDateTimeService } from '@/core/commons';

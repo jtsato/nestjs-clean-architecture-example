@@ -5,5 +5,4 @@ export interface IRegisterUserUseCase {
     execute(command: RegisterUserCommand): Promise<User>;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-redeclare
-export const IRegisterUserUseCase = Symbol('IRegisterUserUseCase');
+export const IRegisterUserUseCaseSymbol = Symbol('IRegisterUserUseCase');

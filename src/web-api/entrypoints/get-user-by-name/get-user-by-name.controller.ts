@@ -1,11 +1,11 @@
 import { Controller, Get, Header, Inject, Query } from '@nestjs/common';
 import { User } from '@/core/models';
-import { GetUserByNameQuery, IGetUserByNameUseCase } from '@/core/usecases/get-user-by-name';
+import { GetUserByNameQuery, IGetUserByNameUseCase, IGetUserByNameUseCaseSymbol } from '@/core/usecases/get-user-by-name';
 import { UserPresenter, UserResponse } from '@/web-api/xcutting';
 
 @Controller('/users/by-name')
 export class GetUserByNameController {
-    constructor(@Inject(IGetUserByNameUseCase) private getUserByNameUseCase: IGetUserByNameUseCase) { }
+    constructor(@Inject(IGetUserByNameUseCaseSymbol) private getUserByNameUseCase: IGetUserByNameUseCase) { }
 
     @Get()
     @Header('Content-Type', 'application/json')

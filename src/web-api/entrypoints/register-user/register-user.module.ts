@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
-import { RegisterUserUseCase, IRegisterUserGateway } from '@/core/usecases/register-user';
+import { IRegisterUserGatewaySymbol, RegisterUserUseCase } from '@/core/usecases/register-user';
 import { GetUserByNameModule } from '@/web-api/entrypoints/get-user-by-name';
 import { RegisterUserController } from '@/web-api/entrypoints/register-user';
 import { GetUserByNameProvider, RegisterUserProvider } from '@/infra/providers';
-import { IGetUserByNameGateway } from '@/core/usecases/xcutting';
+import { IGetUserByNameGatewaySymbol } from '@/core/usecases/xcutting';
 import { UserRepository } from '@/infra/repositories';
-import { IRegisterUserUseCase } from '@/core/usecases/register-user/register-user-usecase.interface';
-import { GetDateTimeService, IGetDateTimeService } from '@/core/commons';
+import { IRegisterUserUseCaseSymbol } from '@/core/usecases/register-user/register-user-usecase.interface';
+import { GetDateTimeService, IGetDateTimeSymbol } from '@/core/commons';
 import { WebModule } from '@/web-api/commons/modules';
 
 @Module({
@@ -16,19 +16,19 @@ import { WebModule } from '@/web-api/commons/modules';
         // IsUsernameUniqueConstraint,
         UserRepository,
         {
-            provide: IGetDateTimeService,
+            provide: IGetDateTimeSymbol,
             useClass: GetDateTimeService,
         },
         {
-            provide: IGetUserByNameGateway,
+            provide: IGetUserByNameGatewaySymbol,
             useClass: GetUserByNameProvider,
         },
         {
-            provide: IRegisterUserUseCase,
+            provide: IRegisterUserUseCaseSymbol,
             useClass: RegisterUserUseCase,
         },
         {
-            provide: IRegisterUserGateway,
+            provide: IRegisterUserGatewaySymbol,
             useClass: RegisterUserProvider,
         },
     ],
