@@ -54,5 +54,5 @@
     "index.ts": "template",
     "main.ts": "cmake"
   },
-  "window.zoomLevel": 1
+  "window.zoomLevel": 0
 }
