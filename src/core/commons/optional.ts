@@ -40,12 +40,12 @@ export class Optional<T> {
         return this.isPresent() ? this.value : method();
     }
 
-    public orElseThrow<E extends Error>(error: new () => E): T {
+    public orElseThrow<E extends Error>(error: () => E): T {
         if (this.isPresent()) {
             return this.value;
         }
-        // eslint-disable-next-line @typescript-eslint/no-throw-literal, new-cap
-        throw new error();
+        // eslint-disable-next-line @typescript-eslint/no-throw-literal
+        throw error();
     }
 
     public map<R>(mapper: (value: T) => R): Optional<R> {

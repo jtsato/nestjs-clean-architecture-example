@@ -4,6 +4,7 @@ import { NotFoundException } from '@/core/exceptions';
 import { User } from '@/core/models';
 import { IGetUserByNameGateway } from '@/core/usecases/xcutting';
 import { GetUserByNameQuery, GetUserByNameUseCase, IGetUserByNameUseCase } from '@/core/usecases/get-user-by-name';
+import { Optional } from '@/core/commons/optional';
 
 const gateway: MockProxy<IGetUserByNameGateway> = mock<IGetUserByNameGateway>();
 const usecase: IGetUserByNameUseCase = new GetUserByNameUseCase(gateway);
@@ -19,7 +20,7 @@ describe('GetUserByNameUseCase', () => {
             gateway
                 .execute
                 .calledWith('jszero')
-                .mockResolvedValue(null);
+                .mockResolvedValue(Optional.empty());
 
             const query: GetUserByNameQuery = new GetUserByNameQuery('jszero');
 
@@ -39,14 +40,14 @@ describe('GetUserByNameUseCase', () => {
             gateway
                 .execute
                 .calledWith('jszero')
-                .mockResolvedValue(new User(
+                .mockResolvedValue(Optional.of(new User(
                     1,
                     'jszero',
                     'john.smith.zero@xyz.com',
                     'P@ssw0rd',
                     'John Smith Zero',
                     new Date(2022, 11, 27, 0, 0, 0),
-                ));
+                )));
 
             const query: GetUserByNameQuery = new GetUserByNameQuery('jszero');
 

@@ -7,13 +7,14 @@ const registerUserProvider = new RegisterUserProvider(repository);
 const getUserByNameProvider = new GetUserByNameProvider(repository);
 
 describe('GetUserByNameProvider, execute()', () => {
-    it('should return null when user is not found', async () => {
+    it('should return an empty optional when user is not found', async () => {
         // Arrange
         // Act
-        const userEntity = await getUserByNameProvider.execute('unknown');
+        const optional = await getUserByNameProvider.execute('unknown');
 
         // Assert
-        expect(userEntity).toBeNull();
+        expect(optional).not.toBeNull();
+        expect(optional.isPresent()).toBe(false);
     });
 
     it('should return user entity when provider is invoked', async () => {
@@ -28,9 +29,14 @@ describe('GetUserByNameProvider, execute()', () => {
         ));
 
         // Act
-        const user = await getUserByNameProvider.execute('jszero');
+        const optional = await getUserByNameProvider.execute('jszero');
 
         // Assert
+        expect(optional).not.toBeNull();
+        expect(optional.isPresent()).toBeTruthy();
+        expect(optional.get()).toBeInstanceOf(User);
+
+        const user = optional.get();
         expect(user).not.toBeNull();
         expect(user).toBeInstanceOf(User);
         expect(user.id).toBe(1);

@@ -6,6 +6,7 @@ import { User } from '@/core/models';
 import { IGetUserByNameGateway } from '@/core/usecases/xcutting';
 import { IGetDateTimeService } from '@/core/commons';
 import { UniqueConstraintException } from '@/core/exceptions';
+import { Optional } from '@/core/commons/optional';
 
 const getUserByNameGatewayMock: MockProxy<IGetUserByNameGateway> = mock<IGetUserByNameGateway>();
 const getDateTimeServiceMock: MockProxy<IGetDateTimeService> = mock<IGetDateTimeService>();
@@ -26,14 +27,14 @@ describe('RegisterUserUseCase', () => {
             getUserByNameGatewayMock
                 .execute
                 .calledWith('jszero')
-                .mockResolvedValue(new User(
+                .mockResolvedValue(Optional.of(new User(
                     1,
                     'jszero',
                     'john.smith.zero@xyz.com',
                     'P@ssw0rd',
                     'John Smith Zero',
                     new Date(2022, 11, 27, 0, 0, 0),
-                ));
+                )));
 
             const command: RegisterUserCommand = new RegisterUserCommand('jszero', 'john.smith.zero@xyz.com', 'P@ssw0rd', 'John Smith Zero');
 
@@ -53,7 +54,7 @@ describe('RegisterUserUseCase', () => {
             getUserByNameGatewayMock
                 .execute
                 .calledWith('jszero')
-                .mockResolvedValue(null);
+                .mockResolvedValue(Optional.empty());
 
             getDateTimeServiceMock
                 .now

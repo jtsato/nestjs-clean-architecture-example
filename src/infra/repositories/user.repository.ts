@@ -1,3 +1,4 @@
+import { Optional } from '@/core/commons/optional';
 import { User } from '@/core/models';
 
 export class UserRepository {
@@ -10,8 +11,9 @@ export class UserRepository {
         return Promise.resolve(userWithId);
     }
 
-    public findByName(name: string): Promise<User> {
+    public findByName(name: string): Promise<Optional<User>> {
         const user = UserRepository.users.find((element) => element.name === name);
-        return Promise.resolve(user);
+        const optional = Optional.ofNullable(user);
+        return Promise.resolve(optional);
     }
 }

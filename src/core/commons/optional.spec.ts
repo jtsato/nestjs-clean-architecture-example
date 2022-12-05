@@ -81,12 +81,12 @@ describe('Optional', () => {
     describe('orElseThrow', () => {
         it('should return the value if present', () => {
             const optional = Optional.of('foo');
-            expect(optional.orElseThrow(Error)).toBe('foo');
+            expect(optional.orElseThrow(() => new Error('bar'))).toBe('foo');
         });
 
         it('should throw the given error if not present', () => {
             const optional = Optional.empty();
-            expect(() => optional.orElseThrow(Error)).toThrow(Error);
+            expect(() => optional.orElseThrow(() => new Error('bar'))).toThrow('bar');
         });
     });
 

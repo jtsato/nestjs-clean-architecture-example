@@ -31,9 +31,11 @@ export class RegisterUserUseCase implements IRegisterUserUseCase {
     }
 
     async checkDuplicatedName(name: string): Promise<void> {
-        const user: User = await this.getUserByNameGateway.execute(name);
-        if (user) {
-            throw new UniqueConstraintException('validation.user.name.duplicated {}', [name]);
-        }
+        const optional = await this.getUserByNameGateway.execute(name);
+        optional.ifPresent(() => this.throwUniqueConstraintException(name));
+    }
+
+    throwUniqueConstraintException(name: string): void {
+        throw new UniqueConstraintException('validation.user.name.duplicated {}', [name]);
     }
 }
