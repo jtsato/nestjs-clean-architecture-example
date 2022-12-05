@@ -25,16 +25,16 @@ describe('Optional', () => {
     });
 
     describe('ofNullable', () => {
-        it('should return an Optional with the given value', () => {
-            const optional = Optional.ofNullable('foo');
-            expect(optional.isPresent()).toBe(true);
-            expect(optional.get()).toBe('foo');
-        });
-
         it('should return an empty Optional', () => {
             const optional = Optional.ofNullable(null as string);
             expect(optional.isPresent()).toBe(false);
             expect(() => optional.get()).toThrow('No value present');
+        });
+
+        it('should return an Optional with the given value', () => {
+            const optional = Optional.ofNullable('foo');
+            expect(optional.isPresent()).toBe(true);
+            expect(optional.get()).toBe('foo');
         });
     });
 
