@@ -1,7 +1,7 @@
 export class CoreException extends Error {
-    public parameters: any[];
+    public parameters: Array<any>;
 
-    constructor(message: string, parameters: any[]) {
+    constructor(message: string, parameters: Array<any>) {
         super(message);
         this.message = message;
         this.parameters = parameters;

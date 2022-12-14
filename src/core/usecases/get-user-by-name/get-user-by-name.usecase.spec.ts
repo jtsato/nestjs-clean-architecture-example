@@ -29,7 +29,7 @@ describe('GetUserByNameUseCase', () => {
 
             // Assert
             expect(exception).not.toBeNull();
-            expect(exception.message).toBe('validation.user.name.not.found {}');
+            expect(exception.message).toBe('validation.user.name.not.found');
             expect(exception.parameters).not.toBeNull();
             expect(exception.parameters).toHaveLength(1);
             expect(exception.parameters[0]).toBe('jszero');

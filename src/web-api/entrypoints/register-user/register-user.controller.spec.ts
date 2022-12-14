@@ -57,7 +57,7 @@ describe('POST /users', () => {
         expect(response.header).toHaveProperty('content-type', 'application/json; charset=utf-8');
         expect(response.body).toEqual({
             code: 500,
-            message: 'common.unexpected.exception',
+            message: 'An unexpected error has occurred, please try again later!',
             fields: [],
         });
     });
@@ -110,12 +110,12 @@ describe('POST /users', () => {
         expect(response.header).toHaveProperty('content-type', 'application/json; charset=utf-8');
         expect(response.body).toEqual({
             code: 400,
-            message: 'common.validation.alert',
+            message: 'Please correct the errors and try again.',
             fields: [
-                { name: 'name', message: 'validation.user.name.blank', value: '' },
-                { name: 'email', message: 'validation.user.email.blank', value: '' },
-                { name: 'password', message: 'validation.user.password.blank', value: '' },
-                { name: 'fullname', message: 'validation.user.fullname.blank', value: '' },
+                { name: 'name', message: 'The user name is required.', value: '' },
+                { name: 'email', message: 'The user email is required.', value: '' },
+                { name: 'password', message: 'The user password is required.', value: '' },
+                { name: 'fullname', message: 'The user fullname is required.', value: '' },
             ],
         });
     });
@@ -130,7 +130,7 @@ describe('POST /users', () => {
                 'P@ssw0rd',
                 'John Smith Zero',
             )))
-            .mockRejectedValue(new UniqueConstraintException('validation.user.name.duplicated {}', ['jszero']));
+            .mockRejectedValue(new UniqueConstraintException('validation.user.name.duplicated', ['jszero']));
 
         // Act
         const response = await request(app.getHttpServer())
@@ -149,7 +149,7 @@ describe('POST /users', () => {
         expect(response.header).toHaveProperty('content-type', 'application/json; charset=utf-8');
         expect(response.body).toEqual({
             code: 400,
-            message: 'validation.user.name.duplicated jszero',
+            message: 'There is already a user named jszero registered.',
             fields: [],
         });
     });

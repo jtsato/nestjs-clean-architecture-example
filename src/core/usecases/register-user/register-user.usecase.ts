@@ -36,6 +36,6 @@ export class RegisterUserUseCase implements IRegisterUserUseCase {
     }
 
     throwUniqueConstraintException(name: string): void {
-        throw new UniqueConstraintException('validation.user.name.duplicated {}', [name]);
+        throw new UniqueConstraintException('validation.user.name.duplicated', [name]);
     }
 }

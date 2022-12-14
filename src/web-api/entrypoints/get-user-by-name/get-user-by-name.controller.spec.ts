@@ -45,7 +45,7 @@ describe('GET /users/by-name', () => {
         expect(response.header).toHaveProperty('content-type', 'application/json; charset=utf-8');
         expect(response.body).toEqual({
             code: 500,
-            message: 'common.unexpected.exception',
+            message: 'An unexpected error has occurred, please try again later!',
             fields: [],
         });
     });
@@ -66,9 +66,9 @@ describe('GET /users/by-name', () => {
         expect(response.header).toHaveProperty('content-type', 'application/json; charset=utf-8');
         expect(response.body).toEqual({
             code: 400,
-            message: 'common.validation.alert',
+            message: 'Please correct the errors and try again.',
             fields: [
-                { name: 'name', message: 'validation.user.name.blank', value: '' },
+                { name: 'name', message: 'The user name is required.', value: '' },
             ],
         });
     });
@@ -78,7 +78,7 @@ describe('GET /users/by-name', () => {
         usecase
             .execute
             .calledWith(dataObjectMatcher(new GetUserByNameQuery('jszero')))
-            .mockRejectedValue(new NotFoundException('validation.user.name.not.found {}', ['jszero']));
+            .mockRejectedValue(new NotFoundException('validation.user.name.not.found', ['jszero']));
 
         // Act
         const response = await request(app.getHttpServer())
@@ -89,7 +89,7 @@ describe('GET /users/by-name', () => {
         expect(response.header).toHaveProperty('content-type', 'application/json; charset=utf-8');
         expect(response.body).toEqual({
             code: 404,
-            message: 'validation.user.name.not.found jszero',
+            message: 'The user named jszero cannot be found.',
             fields: [],
         });
     });

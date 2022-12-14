@@ -1,0 +1,11 @@
+{
+  "common.unexpected.exception": "Um erro inesperado ocorreu. Por favor, tente novamente mais tarde.",
+  "common.validation.alert": "Por favor, corrija os erros e tente novamente.",
+  "validation.user.name.blank": "O nome do usuário é obrigatório.",
+  "validation.user.name.not.found": "O usuário {0} não foi encontrado.",
+  "validation.user.name.duplicated": "Já existe um usuário com o nome {0}.",
+  "validation.user.email.blank": "O email do usuário é obrigatório.",
+  "validation.user.email.invalid": "O email do usuário é inválido.",
+  "validation.user.password.blank": "O password do usuário é obrigatório.",
+  "validation.user.fullname.blank": "O nome completo do usuário é obrigatório."
+}

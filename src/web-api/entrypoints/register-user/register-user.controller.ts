@@ -11,13 +11,12 @@ export class RegisterUserController {
 
     @Post()
     @Header('Content-Type', 'application/json')
-    @Header('Cache-Control', 'no-cache')
-    async execute(@Body() registerUserRequest: RegisterUserRequest): Promise<HttpResponse> {
+    async execute(@Body() request: RegisterUserRequest): Promise<HttpResponse> {
         const command: RegisterUserCommand = new RegisterUserCommand(
-            registerUserRequest.name,
-            registerUserRequest.email,
-            registerUserRequest.password,
-            registerUserRequest.fullname,
+            request.name,
+            request.email,
+            request.password,
+            request.fullname,
         );
 
         const user: User = await this.registerUserUseCase.execute(command);

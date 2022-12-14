@@ -1,0 +1,11 @@
+{
+  "common.unexpected.exception": "An unexpected error has occurred, please try again later!",
+  "common.validation.alert": "Please correct the errors and try again.",
+  "validation.user.name.blank": "The user name is required.",
+  "validation.user.name.not.found": "The user named {0} cannot be found.",
+  "validation.user.name.duplicated": "There is already a user named {0} registered.",
+  "validation.user.email.blank": "The user email is required.",
+  "validation.user.email.invalid": "The user email is invalid.",
+  "validation.user.password.blank": "The user password is required.",
+  "validation.user.fullname.blank": "The user fullname is required."
+}
