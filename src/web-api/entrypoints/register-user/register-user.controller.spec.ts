@@ -14,9 +14,7 @@ const usecase: MockProxy<IRegisterUserUseCase> = mock<IRegisterUserUseCase>();
 describe('POST /users', () => {
     let app: INestApplication;
 
-    beforeEach(async () => {
-        mockReset(usecase);
-
+    beforeAll(async () => {
         const moduleRef = await Test.createTestingModule({
             imports: [RegisterUserModule],
         })
@@ -26,6 +24,10 @@ describe('POST /users', () => {
 
         app = moduleRef.createNestApplication();
         await app.init();
+    });
+
+    beforeEach(() => {
+        mockReset(usecase);
     });
 
     it('should return 500 Internal Server Error when an unexpected error occurs', async () => {
@@ -199,5 +201,9 @@ describe('POST /users', () => {
                 createdAt: '2022-12-27 00:00:00',
             },
         );
+    });
+
+    afterAll(async () => {
+        await app.close();
     });
 });

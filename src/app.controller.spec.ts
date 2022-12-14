@@ -3,10 +3,11 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
 describe('AppController', () => {
+    let app: TestingModule;
     let appController: AppController;
 
-    beforeEach(async () => {
-        const app: TestingModule = await Test.createTestingModule({
+    beforeAll(async () => {
+        app = await Test.createTestingModule({
             controllers: [AppController],
             providers: [AppService],
         }).compile();
@@ -24,5 +25,9 @@ describe('AppController', () => {
         it('should return status "UP"', () => {
             expect(appController.getReadyCheck()).toEqual({ status: 'UP' });
         });
+    });
+
+    afterAll(async () => {
+        await app.close();
     });
 });

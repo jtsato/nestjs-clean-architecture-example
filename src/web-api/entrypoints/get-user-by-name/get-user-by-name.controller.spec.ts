@@ -15,9 +15,7 @@ const usecase: MockProxy<IGetUserByNameUseCase> = mock<IGetUserByNameUseCase>();
 describe('GET /users/by-name', () => {
     let app: INestApplication;
 
-    beforeEach(async () => {
-        mockReset(usecase);
-
+    beforeAll(async () => {
         const moduleRef = await Test.createTestingModule({
             imports: [GetUserByNameModule],
         })
@@ -27,6 +25,10 @@ describe('GET /users/by-name', () => {
 
         app = moduleRef.createNestApplication();
         await app.init();
+    });
+
+    beforeEach(() => {
+        mockReset(usecase);
     });
 
     it('should return 500 Internal Server Error when an unexpected error occurs', async () => {
