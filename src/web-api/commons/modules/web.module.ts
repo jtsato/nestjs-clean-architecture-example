@@ -1,6 +1,6 @@
 import { Module, Scope } from '@nestjs/common';
 import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
-import { AcceptLanguageResolver, HeaderResolver, I18nModule, QueryResolver } from 'nestjs-i18n';
+import { AcceptLanguageResolver, I18nModule } from 'nestjs-i18n';
 import * as path from 'path';
 import { GlobalExceptionFilter, NotFoundExceptionFilter, UniqueConstraintExceptionFilter, ValidationExceptionFilter } from '@/web-api/commons/filters';
 import { ResponseTransformerInterceptor, StopwatchInterceptor } from '@/web-api/commons/interceptors';
@@ -18,7 +18,7 @@ import { ResponseTransformerInterceptor, StopwatchInterceptor } from '@/web-api/
                 watch: true,
             },
             resolvers: [
-                { use: AcceptLanguageResolver, options: ['en', 'pt'] },
+                AcceptLanguageResolver,
             ],
         }),
     ],

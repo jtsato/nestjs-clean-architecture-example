@@ -7,7 +7,7 @@ import { AppModule } from '@/app.module';
 describe('AppController (e2e)', () => {
     let app: INestApplication;
 
-    beforeEach(async () => {
+    beforeAll(async () => {
         const moduleFixture: TestingModule = await Test.createTestingModule({
             imports: [AppModule],
         }).compile();
@@ -25,4 +25,8 @@ describe('AppController (e2e)', () => {
         .get('/health-check/ready')
         .expect(200)
         .expect({ status: 'UP' }));
+
+    afterAll(async () => {
+        await app.close();
+    });
 });
