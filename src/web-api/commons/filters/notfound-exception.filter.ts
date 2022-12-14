@@ -1,7 +1,7 @@
 import { ArgumentsHost, Catch, ExceptionFilter, HttpStatus, Logger } from '@nestjs/common';
 import { HttpArgumentsHost } from '@nestjs/common/interfaces';
 import { AbstractHttpAdapter, HttpAdapterHost } from '@nestjs/core';
-import { I18nService } from 'nestjs-i18n';
+import { I18nContext } from 'nestjs-i18n';
 import { NotFoundException } from '@/core/exceptions';
 import { ResponseStatus } from '@/web-api/commons/models';
 
@@ -9,11 +9,9 @@ import { ResponseStatus } from '@/web-api/commons/models';
 export class NotFoundExceptionFilter implements ExceptionFilter<NotFoundException> {
     private readonly logger = new Logger(NotFoundExceptionFilter.name);
     private readonly httpAdapter: AbstractHttpAdapter;
-    private readonly i18n: I18nService;
 
-    constructor(adapterHost: HttpAdapterHost, i18n: I18nService) {
+    constructor(adapterHost: HttpAdapterHost) {
         this.httpAdapter = adapterHost.httpAdapter;
-        this.i18n = i18n;
     }
 
     catch(exception: NotFoundException, host: ArgumentsHost) {
@@ -28,8 +26,7 @@ export class NotFoundExceptionFilter implements ExceptionFilter<NotFoundExceptio
     }
 
     private getErrorMessage(key: string, parameters: Array<any>): string {
-        let message: string = this.i18n.translate(key);
-
+        let message: string = I18nContext.current().translate(key);
         for (let index = 0; index < parameters.length; index += 1) {
             const parameter: string = parameters[index] as unknown as string;
             message = message.replace(`{${index}}`, parameter);

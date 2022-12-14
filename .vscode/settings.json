@@ -1,7 +1,12 @@
 {
+  "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
     "source.addMissingImports": true,
     "source.fixAll.eslint": true
+  },
+  "prettier.singleQuote": true,
+  "[typescript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
   },
   "workbench.iconTheme": "material-icon-theme",
   "material-icon-theme.activeIconPack": "nest",
@@ -52,7 +57,7 @@
     "*.matcher.ts": "todo",
     "*.spec.ts": "test-jsx",
     "index.ts": "template",
+    "optional.ts": "3d",
     "main.ts": "cmake"
-  },
-  "window.zoomLevel": 0
+  }
 }

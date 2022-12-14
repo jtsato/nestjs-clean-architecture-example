@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { IGetDateTimeService } from '@/core/commons';
+import { IGetDateTimeService } from './get-date-time-service.interface';
 
 @Injectable()
 export class GetDateTimeService implements IGetDateTimeService {

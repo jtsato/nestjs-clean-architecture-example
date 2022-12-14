@@ -3,14 +3,14 @@ import { UniqueConstraintException } from '@/core/exceptions';
 import { User } from '@/core/models';
 import { IRegisterUserGateway, IRegisterUserGatewaySymbol, IRegisterUserUseCase, RegisterUserCommand } from '@/core/usecases/register-user';
 import { IGetUserByNameGateway, IGetUserByNameGatewaySymbol } from '@/core/usecases/xcutting';
-import { IGetDateTimeSymbol, IGetDateTimeService } from '@/core/commons';
+import { IGetDateTimeService, IGetDateTimeServiceSymbol } from '@/core/commons/get-date-time-service.interface';
 
 @Injectable()
 export class RegisterUserUseCase implements IRegisterUserUseCase {
     constructor(
         @Inject(IGetUserByNameGatewaySymbol)
         private getUserByNameGateway: IGetUserByNameGateway,
-        @Inject(IGetDateTimeSymbol)
+        @Inject(IGetDateTimeServiceSymbol)
         private getDateTimeService: IGetDateTimeService,
         @Inject(IRegisterUserGatewaySymbol)
         private registerUserGateway: IRegisterUserGateway,

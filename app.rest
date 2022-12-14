@@ -1,8 +1,10 @@
 ###
 GET http://localhost:3000/health-check/live
+Accept-Language: en-US
 
 ###
 GET http://localhost:3000/health-check/ready
+Accept-Language: pt-BR
 
 ###
 POST http://localhost:3000/users
@@ -29,6 +31,19 @@ Content-Type: application/json
 ###
 POST http://localhost:3000/users
 Content-Type: application/json
+Accept-Language: pt-BR
+
+{
+  "name": "",
+  "email": "wrong.email.com",
+  "password": "",
+  "fullName": null
+}
+
+###
+POST http://localhost:3000/users
+Content-Type: application/json
+Accept-Language: en-US
 
 {
   "name": "",

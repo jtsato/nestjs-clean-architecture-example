@@ -1,3 +1,7 @@
 export class Field {
-    constructor(public name: string, public message: string, public value: string) { }
+    constructor(
+        public name: string,
+        public message: string,
+        public value: string,
+    ) {}
 }

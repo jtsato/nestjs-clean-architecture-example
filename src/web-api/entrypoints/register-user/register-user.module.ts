@@ -6,7 +6,7 @@ import { GetUserByNameProvider, RegisterUserProvider } from '@/infra/providers';
 import { IGetUserByNameGatewaySymbol } from '@/core/usecases/xcutting';
 import { UserRepository } from '@/infra/repositories';
 import { IRegisterUserUseCaseSymbol } from '@/core/usecases/register-user/register-user-usecase.interface';
-import { GetDateTimeService, IGetDateTimeSymbol } from '@/core/commons';
+import { GetDateTimeService, IGetDateTimeServiceSymbol } from '@/core/commons';
 import { WebModule } from '@/web-api/commons/modules';
 
 @Module({
@@ -15,7 +15,7 @@ import { WebModule } from '@/web-api/commons/modules';
     providers: [
         UserRepository,
         {
-            provide: IGetDateTimeSymbol,
+            provide: IGetDateTimeServiceSymbol,
             useClass: GetDateTimeService,
         },
         {

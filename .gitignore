@@ -34,5 +34,10 @@ lerna-debug.log*
 !.vscode/launch.json
 !.vscode/extensions.json
 
-# misc
-package-lock.json
+# temporary folders and files
+.eslintcache
+**/.coverage/**
+**/.scannerwork/**
+**/.stryker-tmp/**
+**/reports/**
+**/sonar-report.xml

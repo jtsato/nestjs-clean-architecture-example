@@ -1,4 +1,4 @@
-import { GetDateTimeService, IGetDateTimeService } from '@/core/commons';
+import { IGetDateTimeService, GetDateTimeService } from '@/core/commons';
 
 describe('GetDateTimeService, now()', () => {
     it('should return the current date', () => {

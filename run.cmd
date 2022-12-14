@@ -50,7 +50,7 @@ IF /I "%~2"=="e2e" GOTO e2e
 IF /I "%~2"=="coverage" GOTO coverage
 IF /I "%~2"=="mutation" GOTO mutation
 
-GOTO app
+GOTO end
 
 :test
 ECHO.
