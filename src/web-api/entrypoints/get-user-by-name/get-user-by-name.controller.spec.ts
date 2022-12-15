@@ -27,6 +27,10 @@ describe('GET /users/by-name', () => {
         await app.init();
     });
 
+    afterAll(async () => {
+        await app.close();
+    });
+
     beforeEach(() => {
         mockReset(usecase);
     });
@@ -125,9 +129,5 @@ describe('GET /users/by-name', () => {
             fullname: 'John Smith Zero',
             createdAt: '2022-12-27 00:00:00',
         });
-    });
-
-    afterAll(async () => {
-        await app.close();
     });
 });

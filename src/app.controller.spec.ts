@@ -15,6 +15,10 @@ describe('AppController', () => {
         appController = app.get<AppController>(AppController);
     });
 
+    afterAll(async () => {
+        await app.close();
+    });
+
     describe('health-check-live', () => {
         it('should return status "UP"', () => {
             expect(appController.getHealthCheck()).toEqual({ status: 'UP' });
@@ -25,9 +29,5 @@ describe('AppController', () => {
         it('should return status "UP"', () => {
             expect(appController.getReadyCheck()).toEqual({ status: 'UP' });
         });
-    });
-
-    afterAll(async () => {
-        await app.close();
     });
 });

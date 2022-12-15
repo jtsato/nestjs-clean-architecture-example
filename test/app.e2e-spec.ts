@@ -16,6 +16,10 @@ describe('AppController (e2e)', () => {
         await app.init();
     });
 
+    afterAll(async () => {
+        await app.close();
+    });
+
     it('/health-check/live (GET)', () => request(app.getHttpServer())
         .get('/health-check/live')
         .expect(200)
@@ -25,8 +29,4 @@ describe('AppController (e2e)', () => {
         .get('/health-check/ready')
         .expect(200)
         .expect({ status: 'UP' }));
-
-    afterAll(async () => {
-        await app.close();
-    });
 });
