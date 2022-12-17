@@ -17,9 +17,13 @@ export class GetUserByNameQueryValidator extends Validator<GetUserByNameQuery> {
 
     public static getInstance(): GetUserByNameQueryValidator {
         if (!GetUserByNameQueryValidator.instance) {
-            GetUserByNameQueryValidator.instance = new GetUserByNameQueryValidator();
+            GetUserByNameQueryValidator.instance = this.createInstance();
         }
         return GetUserByNameQueryValidator.instance;
+    }
+
+    public static createInstance(): GetUserByNameQueryValidator {
+        return new GetUserByNameQueryValidator();
     }
 
     public static ValidateAndThrow(command: GetUserByNameQuery): void {

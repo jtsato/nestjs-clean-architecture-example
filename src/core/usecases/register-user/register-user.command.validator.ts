@@ -38,9 +38,13 @@ export class RegisterUserCommandValidator extends Validator<RegisterUserCommand>
 
     private static getInstance(): RegisterUserCommandValidator {
         if (!RegisterUserCommandValidator.instance) {
-            RegisterUserCommandValidator.instance = new RegisterUserCommandValidator();
+            RegisterUserCommandValidator.instance = this.createInstance();
         }
         return RegisterUserCommandValidator.instance;
+    }
+
+    private static createInstance(): RegisterUserCommandValidator {
+        return new RegisterUserCommandValidator();
     }
 
     public static ValidateAndThrow(command: RegisterUserCommand): void {

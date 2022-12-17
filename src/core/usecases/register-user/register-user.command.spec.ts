@@ -1,9 +1,11 @@
 /* eslint-disable sonarjs/no-duplicate-string */
 import { ValidationException } from '@/core/exceptions';
-import { RegisterUserCommand } from '@/core/usecases/register-user';
+import { RegisterUserCommand, RegisterUserCommandValidator } from '@/core/usecases/register-user';
 import { CatchExceptionHelper } from '~/test/helpers';
 
 describe('RegisterUserCommand, constructor()', () => {
+    const singletonSpy = jest.spyOn(RegisterUserCommandValidator as any, 'createInstance');
+
     it('should throw an error when the command has null parameters', () => {
         // Arrange
         const errors = {
@@ -18,6 +20,8 @@ describe('RegisterUserCommand, constructor()', () => {
             .catch(() => new RegisterUserCommand(null, null, null, null));
 
         // Assert
+        expect(singletonSpy).toHaveBeenCalledTimes(1);
+
         expect(exception).not.toBeNull();
         expect(exception.message).toBe('common.validation.alert');
         expect(exception.parameters).not.toBeNull();
@@ -39,6 +43,8 @@ describe('RegisterUserCommand, constructor()', () => {
             .catch(() => new RegisterUserCommand('', '', '', ''));
 
         // Assert
+        expect(singletonSpy).toHaveBeenCalledTimes(1);
+
         expect(exception).not.toBeNull();
         expect(exception.message).toBe('common.validation.alert');
         expect(exception.parameters).not.toBeNull();
@@ -52,6 +58,8 @@ describe('RegisterUserCommand, constructor()', () => {
         const command: RegisterUserCommand = new RegisterUserCommand('jszero', 'john.smith.zero@xyz.com', 'P@ssw0rd', 'John Smith Zero');
 
         // Assert
+        expect(singletonSpy).toHaveBeenCalledTimes(1);
+
         expect(command).not.toBeNull();
         expect(command.name).toBe('jszero');
         expect(command.email).toBe('john.smith.zero@xyz.com');
