@@ -20,11 +20,12 @@ export class RegisterUserController {
         );
 
         const user: User = await this.registerUserUseCase.execute(command);
+        const userResponse = UserPresenter.of(user);
 
         return new HttpResponseBuilder()
             .withStatus(HttpStatus.CREATED)
             .withHeaders({ Location: `/users/by-name?name=${user.name}` })
-            .withBody(UserPresenter.of(user))
+            .withBody(userResponse)
             .build();
     }
 }
