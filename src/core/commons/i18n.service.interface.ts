@@ -1,5 +1,3 @@
-/* istanbul ignore file */
-
 export interface II18nService {
     lang(): string;
     translate(key: string): string;
