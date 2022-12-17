@@ -6,7 +6,7 @@ import { HttpStatus, INestApplication } from '@nestjs/common';
 import { dataObjectMatcher } from '~/test/helpers';
 import { User } from '@/core/models';
 import { IRegisterUserUseCase, IRegisterUserUseCaseSymbol, RegisterUserCommand } from '@/core/usecases/register-user';
-import { CoreException, UniqueConstraintException, ValidationException } from '@/core/exceptions';
+import { CoreException, UniqueConstraintException } from '@/core/exceptions';
 import { RegisterUserModule } from '@/web-api/entrypoints/register-user/register-user.module';
 
 const usecase: MockProxy<IRegisterUserUseCase> = mock<IRegisterUserUseCase>();
