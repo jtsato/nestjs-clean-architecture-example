@@ -1,3 +1,5 @@
+/* istanbul ignore file */
+
 import { User } from '@/core/models';
 
 export interface IRegisterUserGateway {

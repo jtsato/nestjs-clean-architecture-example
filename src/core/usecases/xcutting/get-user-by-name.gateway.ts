@@ -1,3 +1,5 @@
+/* istanbul ignore file */
+
 import { Optional } from '@/core/commons/optional';
 import { User } from '@/core/models';
 
