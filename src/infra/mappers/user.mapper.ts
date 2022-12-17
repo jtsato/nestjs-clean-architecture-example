@@ -14,7 +14,6 @@ export class UserMapper {
     }
 
     public static toUser(userEntity: UserEntity): User {
-        if (!userEntity) { return null; }
         return new User(
             userEntity.id,
             userEntity.name,

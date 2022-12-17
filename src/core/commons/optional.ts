@@ -21,11 +21,11 @@ export class Optional<T> {
     }
 
     public static ofNullable<T>(value: T): Optional<T> {
-        return value !== null ? Optional.of(value) : Optional.empty();
+        return value != null ? Optional.of(value) : Optional.empty();
     }
 
     public isPresent(): boolean {
-        return this.value !== null;
+        return this.value != null;
     }
 
     public ifPresent(method: (value: T) => void): void {

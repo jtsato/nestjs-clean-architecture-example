@@ -1,33 +1,48 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { INestApplication } from '@nestjs/common';
+import { Test } from '@nestjs/testing';
+import * as request from 'supertest';
+import { AppModule } from './app.module';
 
 describe('AppController', () => {
-    let app: TestingModule;
-    let appController: AppController;
+    let app: INestApplication;
 
     beforeAll(async () => {
-        app = await Test.createTestingModule({
-            controllers: [AppController],
-            providers: [AppService],
-        }).compile();
+        const moduleRef = await Test.createTestingModule({
+            imports: [AppModule],
+        })
+            .compile();
 
-        appController = app.get<AppController>(AppController);
+        app = moduleRef.createNestApplication();
+        await app.init();
     });
 
     afterAll(async () => {
         await app.close();
     });
 
-    describe('health-check-live', () => {
-        it('should return status "UP"', () => {
-            expect(appController.getHealthCheck()).toEqual({ status: 'UP' });
+    describe('GET /health-check/live', () => {
+        it('should return status 200 OK with "UP" in the response body.', async () => {
+            // Arrange
+            // Act
+            const response = await request(app.getHttpServer())
+                .get('/health-check/live')
+                .set('Content-Type', 'application/json');
+
+            // Assert
+            expect(response.body).toEqual({ status: 'UP' });
         });
     });
 
-    describe('health-check-ready', () => {
-        it('should return status "UP"', () => {
-            expect(appController.getReadyCheck()).toEqual({ status: 'UP' });
+    describe('GET /health-check/ready', () => {
+        it('should return status 200 OK with "UP" in the response body.', async () => {
+            // Arrange
+            // Act
+            const response = await request(app.getHttpServer())
+                .get('/health-check/ready')
+                .set('Content-Type', 'application/json');
+
+            // Assert
+            expect(response.body).toEqual({ status: 'UP' });
         });
     });
 });
