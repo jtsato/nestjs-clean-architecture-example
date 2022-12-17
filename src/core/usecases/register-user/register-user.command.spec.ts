@@ -4,6 +4,27 @@ import { RegisterUserCommand } from '@/core/usecases/register-user';
 import { CatchExceptionHelper } from '~/test/helpers';
 
 describe('RegisterUserCommand, constructor()', () => {
+    it('should throw an error when the command has null parameters', () => {
+        // Arrange
+        const errors = {
+            name: 'validation.user.name.blank',
+            email: 'validation.user.email.blank',
+            password: 'validation.user.password.blank',
+            fullname: 'validation.user.fullname.blank',
+        };
+
+        // Act
+        const exception: ValidationException = CatchExceptionHelper
+            .catch(() => new RegisterUserCommand(null, null, null, null));
+
+        // Assert
+        expect(exception).not.toBeNull();
+        expect(exception.message).toBe('common.validation.alert');
+        expect(exception.parameters).not.toBeNull();
+        expect(exception.parameters).toHaveLength(2);
+        expect(exception.parameters[1]).toEqual(errors);
+    });
+
     it('should throw an error when the command has empty parameters', () => {
         // Arrange
         const errors = {
