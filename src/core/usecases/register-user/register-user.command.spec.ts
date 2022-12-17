@@ -52,6 +52,26 @@ describe('RegisterUserCommand, constructor()', () => {
         expect(exception.parameters[1]).toEqual(errors);
     });
 
+    it('should throw an error when the command has invalid user email', () => {
+        // Arrange
+        const errors = {
+            email: 'validation.user.email.invalid',
+        };
+
+        // Act
+        const exception: ValidationException = CatchExceptionHelper
+            .catch(() => new RegisterUserCommand('jszero', 'john.smith.zero', 'P@ssw0rd', 'John Smith Zero'));
+
+        // Assert
+        expect(singletonSpy).toHaveBeenCalledTimes(1);
+
+        expect(exception).not.toBeNull();
+        expect(exception.message).toBe('common.validation.alert');
+        expect(exception.parameters).not.toBeNull();
+        expect(exception.parameters).toHaveLength(2);
+        expect(exception.parameters[1]).toEqual(errors);
+    });
+
     it('should create command object when the parameters are filled correcly', () => {
         // Arrange
         // Act
