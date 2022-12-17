@@ -1,3 +1,4 @@
+import { DateTimeHelper } from '@/core/commons/helpers';
 import { User } from '@/core/models';
 import { UserResponse } from '@/web-api/xcutting';
 
@@ -9,14 +10,7 @@ export class UserPresenter {
             user.email,
             user.password,
             user.fullname,
-            this.toLocalISOString(user.createdAt),
+            DateTimeHelper.toLocalISOString(user.createdAt),
         );
-    }
-
-    static toLocalISOString(date: Date): string {
-        const offsetInHours = date.getTimezoneOffset() * 60 * 1000;
-        const localDate = new Date(date.getTime() - offsetInHours);
-        const isoString = localDate.toISOString();
-        return isoString.split('.')[0].replace('T', ' ');
     }
 }
