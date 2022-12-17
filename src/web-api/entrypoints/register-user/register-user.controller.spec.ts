@@ -1,4 +1,4 @@
-import { mock, MockProxy, mockReset } from 'jest-mock-extended';
+import { anyObject, mock, MockProxy, mockReset } from 'jest-mock-extended';
 /* eslint-disable sonarjs/no-duplicate-string */
 import * as request from 'supertest';
 import { Test } from '@nestjs/testing';
@@ -38,12 +38,7 @@ describe('POST /users', () => {
         // Arrange
         usecase
             .execute
-            .calledWith(dataObjectMatcher(new RegisterUserCommand(
-                'jszero',
-                'john.smith.zero@xyz.com',
-                'P@ssw0rd',
-                'John Smith Zero',
-            )))
+            .calledWith(anyObject())
             .mockRejectedValue(new CoreException('common.unexpected.exception', []));
 
         // Act
@@ -62,7 +57,7 @@ describe('POST /users', () => {
         expect(response.status).toBe(HttpStatus.INTERNAL_SERVER_ERROR);
         expect(response.header).toHaveProperty('content-type', 'application/json; charset=utf-8');
         expect(response.body).toEqual({
-            code: 500,
+            code: HttpStatus.INTERNAL_SERVER_ERROR,
             message: 'An unexpected error has occurred, please try again later!',
             fields: [],
         });
@@ -70,35 +65,6 @@ describe('POST /users', () => {
 
     it('should return 400 BadRequest when request parameter is invalid', async () => {
         // Arrange
-        usecase
-            .execute
-            .calledWith(dataObjectMatcher(
-                {
-                    name: '',
-                    email: '',
-                    password: '',
-                    fullname: '',
-                },
-            ))
-            .mockRejectedValue(new ValidationException(
-                'common.validation.alert',
-                [
-                    {
-                        name: '',
-                        email: '',
-                        password: '',
-                        fullname: '',
-                    },
-                    {
-                        name: 'validation.user.name.blank',
-                        email: 'validation.user.email.blank',
-                        password: 'validation.user.password.blank',
-                        fullname: 'validation.user.fullname.blank',
-                    },
-
-                ],
-            ));
-
         // Act
         const response = await request(app.getHttpServer())
             .post('/users')
@@ -154,7 +120,7 @@ describe('POST /users', () => {
         expect(response.status).toBe(HttpStatus.BAD_REQUEST);
         expect(response.header).toHaveProperty('content-type', 'application/json; charset=utf-8');
         expect(response.body).toEqual({
-            code: 400,
+            code: HttpStatus.BAD_REQUEST,
             message: 'There is already a user named jszero registered.',
             fields: [],
         });
