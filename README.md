@@ -129,8 +129,3 @@ yarn start:dev
 
 ##### Videos & Presentations
 * Clean Architecture https://www.youtube.com/results?search_query=clean+architecture
-
-##### Further Information
-* [Confluence](http://confluence.viavarejo.com.br/display/AAOP/Open+Plataform+-+Home)
-
-***
