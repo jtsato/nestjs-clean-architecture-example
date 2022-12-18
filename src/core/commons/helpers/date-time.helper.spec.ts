@@ -1,7 +1,7 @@
 import { DateTimeHelper } from './date-time.helper';
 
 describe('DateTimeHelper, toLocalISOString()', () => {
-    it('should convert to local ISO string when date is UTC', () => {
+    it('should format to local ISO string when date is valid', () => {
         // Arrange
         // Act
         // Assert
