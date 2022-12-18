@@ -129,5 +129,3 @@ yarn start:dev
 
 ##### Videos & Presentations
 * Clean Architecture https://www.youtube.com/results?search_query=clean+architecture
-
-***
