@@ -1,4 +1,5 @@
 /* eslint-disable sonarjs/no-duplicate-string */
+
 import { mock, MockProxy, mockReset } from 'jest-mock-extended';
 import { CatchExceptionHelper, dataObjectMatcher } from '~/test/helpers';
 import { IRegisterUserGateway, IRegisterUserUseCase, RegisterUserCommand, RegisterUserUseCase } from '@/core/usecases/register-user';

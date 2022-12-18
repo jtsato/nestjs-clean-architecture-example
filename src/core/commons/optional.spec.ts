@@ -1,4 +1,5 @@
 /* eslint-disable sonarjs/no-duplicate-string */
+
 import { Optional } from './optional';
 
 describe('Optional', () => {

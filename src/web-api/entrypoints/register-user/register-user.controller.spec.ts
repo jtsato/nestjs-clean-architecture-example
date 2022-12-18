@@ -1,5 +1,6 @@
-import { anyObject, mock, MockProxy, mockReset } from 'jest-mock-extended';
 /* eslint-disable sonarjs/no-duplicate-string */
+
+import { anyObject, mock, MockProxy, mockReset } from 'jest-mock-extended';
 import * as request from 'supertest';
 import { Test } from '@nestjs/testing';
 import { HttpStatus, INestApplication } from '@nestjs/common';
