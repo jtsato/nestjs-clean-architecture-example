@@ -2,24 +2,22 @@
   "$schema": "./node_modules/@stryker-mutator/core/schema/stryker-schema.json",
   "packageManager": "yarn",
   "testRunner": "jest",
-  "coverageAnalysis": "off",
+  "coverageAnalysis": "perTest",
   "concurrency": 4,
   "mutate": [
     "src/**/*.ts",
     "!src/**/*.spec.ts",
     "!src/**/*.interface.ts",
-    "!src/**/*.gateway.ts"
+    "!src/**/*.gateway.ts",
+    "!src/main.ts"
   ],
   "jest": {
     "projectType": "custom",
     "config": {
       "testEnvironment": "node"
     },
-    "enableFindRelatedTests": false
-  },
-  "warnings": {
-    "slow": false
+    "enableFindRelatedTests": true
   },
   "timeoutMS": 60000,
-  "reporters": ["html", "clear-text", "progress-append-only"]
+  "reporters": ["html", "progress-append-only"]
 }
