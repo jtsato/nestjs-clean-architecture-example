@@ -41,10 +41,10 @@ jobs:
           echo "Stryker Configuration:"
           cat stryker.conf.json | grep "concurrency" | tr -d '"' | tr -d ','
 
-      - name: Setup NodeJs [v16]
+      - name: Setup NodeJs [v18]
         uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 18
 
       - name: Install dependencies
         run: |
