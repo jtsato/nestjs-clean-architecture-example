@@ -32,14 +32,14 @@ jobs:
           persist-credentials: true
           fetch-depth: 0
 
-      - name: Running Mutation Tests
+      - name: Getting System Information
         run: |
           echo "Number of processors:"
           grep -c ^processor /proc/cpuinfo
           echo "Number of cores:"
           grep ^cpu\\scores /proc/cpuinfo | uniq |  awk '{print $4}'
           echo "Stryker Configuration:"
-          cat stryker.conf.json | grep "concurrency" | tr -d '"'
+          cat stryker.conf.json | grep "concurrency" | tr -d '"' | tr -d ','
 
       - name: Setup NodeJs [v16]
         uses: actions/setup-node@v3
