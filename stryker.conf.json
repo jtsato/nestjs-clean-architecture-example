@@ -3,7 +3,7 @@
   "packageManager": "yarn",
   "testRunner": "jest",
   "coverageAnalysis": "perTest",
-  "concurrency": 2,
+  "concurrency": 4,
   "mutate": [
     "src/**/*.ts",
     "!src/**/*.spec.ts",

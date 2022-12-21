@@ -25,6 +25,15 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
+      - name: Running Mutation Tests
+        run: |
+          echo "Number of processors:"
+          grep -c ^processor /proc/cpuinfo
+          echo "Number of cores:"
+          grep ^cpu\\scores /proc/cpuinfo | uniq |  awk '{print $4}'
+          echo "Stryker Configuration:"
+          cat stryker.conf.json | grep "concurrency"
+
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
