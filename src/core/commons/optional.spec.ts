@@ -41,6 +41,12 @@ describe('Optional', () => {
         it('should return an empty Optional when value is undefined', () => {
             const optional = Optional.ofNullable(undefined);
             expect(optional.isPresent()).toBe(false);
+            expect(optional).toStrictEqual(Optional.empty());
+        });
+
+        it('should return an empty Optional when value is undefined', () => {
+            const optional = Optional.ofNullable(undefined);
+            expect(optional.isPresent()).toBe(false);
             // eslint-disable-next-line @typescript-eslint/no-unsafe-return
             expect(() => optional.get()).toThrow('No value present');
         });
