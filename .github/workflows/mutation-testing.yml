@@ -66,7 +66,7 @@ jobs:
       - name: Commit the changes
         if: ${{ env.SHOULD_I_COMMIT == 'Yes' }}
         run: |
-		      git config advice.ignoredHook false
+          git config advice.ignoredHook false
           git config pull.rebase false
           git config --local user.email "action@github.com"
           git config --local user.name "Stryker.NET"
