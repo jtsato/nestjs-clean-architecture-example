@@ -2,17 +2,17 @@ import { ApiProperty } from '@nestjs/swagger';
 
 export class Field {
     @ApiProperty({
-        description: 'Name of the error.',
+        description: 'Attribute name',
     })
     public name: string;
 
     @ApiProperty({
-        description: 'Mensage of the error.',
+        description: 'Error message description',
     })
     public message: string;
 
     @ApiProperty({
-        description: 'Value of the error.',
+        description: 'Submitted value',
     })
     public value: string;
 

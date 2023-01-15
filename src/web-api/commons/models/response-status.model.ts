@@ -6,17 +6,17 @@ ApiExtraModels(Field);
 
 export class ResponseStatus {
     @ApiProperty({
-        description: 'Code of the http error.',
+        description: 'HTTP response status code',
     })
     public code: number;
 
     @ApiProperty({
-        description: 'Description of the error.',
+        description: 'Response error message',
     })
     public message: string;
 
     @ApiProperty({
-        description: 'Fields with error.',
+        description: 'Detailed errors by field',
         oneOf: [
             { $ref: getSchemaPath(Field) },
         ],
