@@ -1,17 +1,15 @@
-import { Body, Controller, Header, HttpStatus, Inject, Post } from '@nestjs/common';
+import { HttpStatus, Inject } from '@nestjs/common';
 import { HttpResponse, HttpResponseBuilder } from '@/web-api/commons/models';
 import { RegisterUserRequest } from '@/web-api/entrypoints/register-user';
 import { UserPresenter } from '@/web-api/xcutting';
 import { User } from '@/core/models';
 import { IRegisterUserUseCase, IRegisterUserUseCaseSymbol, RegisterUserCommand } from '@/core/usecases/register-user';
+import { IRegisterUserController } from './register-user.controller.interface';
 
-@Controller('/users')
-export class RegisterUserController {
+export class RegisterUserController implements IRegisterUserController {
     constructor(@Inject(IRegisterUserUseCaseSymbol) private registerUserUseCase: IRegisterUserUseCase) { }
 
-    @Post()
-    @Header('Content-Type', 'application/json')
-    async execute(@Body() request: RegisterUserRequest): Promise<HttpResponse> {
+    async execute(request: RegisterUserRequest): Promise<HttpResponse> {
         const command: RegisterUserCommand = new RegisterUserCommand(
             request.name,
             request.email,

@@ -1,16 +1,23 @@
-import { INestApplication } from '@nestjs/common';
+import { ClassSerializerInterceptor, INestApplication, Scope } from '@nestjs/common';
+import { APP_INTERCEPTOR } from '@nestjs/core';
 import { Test } from '@nestjs/testing';
 import * as request from 'supertest';
-import { AppModule } from './app.module';
+import { I18nModule } from '@/web-api/commons/modules';
+import { HealthCheckModule } from './health-check.module';
 
 describe('AppController', () => {
     let app: INestApplication;
 
     beforeAll(async () => {
         const moduleRef = await Test.createTestingModule({
-            imports: [AppModule],
-        })
-            .compile();
+            imports: [HealthCheckModule, I18nModule],
+            providers: [
+                {
+                    provide: APP_INTERCEPTOR,
+                    useClass: ClassSerializerInterceptor,
+                },
+            ],
+        }).compile();
 
         app = moduleRef.createNestApplication();
         await app.init();

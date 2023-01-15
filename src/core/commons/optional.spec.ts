@@ -26,10 +26,16 @@ describe('Optional', () => {
     });
 
     describe('ofNullable', () => {
-        it('should return an empty Optional when value is null', () => {
+        it('should return an empty Optional when value is string null', () => {
             const optional = Optional.ofNullable(null as string);
             expect(optional.isPresent()).toBe(false);
             expect(() => optional.get()).toThrow('No value present');
+        });
+
+        it('should return an empty Optional when value is null', () => {
+            const optional = Optional.ofNullable(null);
+            expect(optional.isPresent()).toBe(false);
+            expect(optional).toStrictEqual(Optional.empty());
         });
 
         it('should return an empty Optional when value is undefined', () => {

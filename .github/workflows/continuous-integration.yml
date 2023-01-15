@@ -3,7 +3,11 @@ name: Continuous Integration
 on:
   push:
     branches:
-      - '**'
+      - 'main'
+    paths-ignore:
+      - 'docs/**'
+      - '**/*.md'
+      - '.github/workflows/mutation-testing.yml'
   pull_request:
     branches:
       - 'main'
@@ -27,7 +31,7 @@ jobs:
       - name: Install dependencies
         run: |
           npm install -g yarn jest
-          yarn install
+          yarn --ignore-scripts
 
       - name: Checks for known security issues with the installed packages
         run: |

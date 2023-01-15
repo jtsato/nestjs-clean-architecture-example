@@ -38,12 +38,14 @@ GOTO end
 ECHO.
 ECHO Removing node_modules...
 IF EXIST node_modules RD node_modules /s /q
+IF EXIST dist RD dist /s /q
 IF EXIST .nyc_output RD .nyc_output /s /q
 IF EXIST .scannerwork RD .scannerwork /s /q
 IF EXIST .stryker-tmp RD .stryker-tmp /s /q
 IF EXIST coverage RD coverage /s /q
 IF EXIST reports RD reports /s /q
 IF EXIST package-lock.json DEL package-lock.json
+IF EXIST yarn.lock DEL yarn.lock
 
 IF /I "%~2"=="test" GOTO test
 IF /I "%~2"=="e2e" GOTO e2e
@@ -84,7 +86,7 @@ CALL yarn audit --groups dependencies
 
 ECHO.
 ECHO Start browsing...
-START http://localhost:3000/health-check/live
+START http://localhost:3000/swagger-ui
 
 ECHO.
 ECHO Running the server...

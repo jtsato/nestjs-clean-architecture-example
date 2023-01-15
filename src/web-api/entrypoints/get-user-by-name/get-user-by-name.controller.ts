@@ -1,16 +1,13 @@
-import { Controller, Get, Header, Inject, Query } from '@nestjs/common';
+import { Inject } from '@nestjs/common';
 import { User } from '@/core/models';
 import { GetUserByNameQuery, IGetUserByNameUseCase, IGetUserByNameUseCaseSymbol } from '@/core/usecases/get-user-by-name';
 import { UserPresenter, UserResponse } from '@/web-api/xcutting';
+import { IGetUserByNameController } from './get-user-by-name.controller.interface';
 
-@Controller('/users/by-name')
-export class GetUserByNameController {
+export class GetUserByNameController implements IGetUserByNameController {
     constructor(@Inject(IGetUserByNameUseCaseSymbol) private getUserByNameUseCase: IGetUserByNameUseCase) { }
 
-    @Get()
-    @Header('Content-Type', 'application/json')
-    @Header('Cache-Control', 'no-cache')
-    async execute(@Query('name') name: string): Promise<UserResponse> {
+    async execute(name: string): Promise<UserResponse> {
         const query: GetUserByNameQuery = new GetUserByNameQuery(name);
         const user: User = await this.getUserByNameUseCase.execute(query);
         return UserPresenter.of(user);

@@ -14,12 +14,9 @@ export class I18nService implements II18nService {
 
     format(key: string, parameters: any[]): string {
         let message: string = I18nContext.current().translate(key);
-
-        for (let index = 0; index < parameters.length; index += 1) {
-            const parameter: string = parameters[index] as unknown as string;
-            message = message.replace(`{${index}}`, parameter);
-        }
-
+        parameters.forEach((element: string, index: number) => {
+            message = message.replace(`{${index}}`, element);
+        });
         return message;
     }
 }

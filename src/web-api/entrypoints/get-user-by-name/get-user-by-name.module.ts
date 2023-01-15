@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { GetUserByNameUseCase } from '@/core/usecases/get-user-by-name';
-import { GetUserByNameController } from '@/web-api/entrypoints/get-user-by-name';
+import { GetUserByNameController, GetUserByNameDecoratorController, IGetUserByNameControllerSymbol } from '@/web-api/entrypoints/get-user-by-name';
 import { IGetUserByNameGatewaySymbol } from '@/core/usecases/xcutting';
 import { GetUserByNameProvider } from '@/infra/providers';
 import { UserRepository } from '@/infra/repositories';
@@ -9,10 +9,14 @@ import { WebModule } from '@/web-api/commons/modules';
 
 @Module({
     imports: [WebModule],
-    controllers: [GetUserByNameController],
+    controllers: [GetUserByNameDecoratorController],
     providers: [
         UserRepository,
         GetUserByNameProvider,
+        {
+            provide: IGetUserByNameControllerSymbol,
+            useClass: GetUserByNameController,
+        },
         {
             provide: IGetUserByNameUseCaseSymbol,
             useClass: GetUserByNameUseCase,
@@ -25,5 +29,4 @@ import { WebModule } from '@/web-api/commons/modules';
     exports: [IGetUserByNameGatewaySymbol, GetUserByNameProvider],
 })
 
-export class GetUserByNameModule {
-}
+export class GetUserByNameModule { }

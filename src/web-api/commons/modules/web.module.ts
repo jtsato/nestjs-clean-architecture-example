@@ -1,12 +1,12 @@
 import { Module, Scope } from '@nestjs/common';
 import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
 import { GlobalExceptionFilter, NotFoundExceptionFilter, UniqueConstraintExceptionFilter, ValidationExceptionFilter } from '@/web-api/commons/filters';
-import { ResponseTransformerInterceptor, StopwatchInterceptor } from '@/web-api/commons/interceptors';
 import { I18nModule } from './i18n.module';
+import { StopwatchInterceptor, ResponseTransformerInterceptor } from '../interceptors';
 
 @Module({
     imports: [I18nModule],
-    exports: [],
+    exports: [I18nModule],
     controllers: [],
     providers: [
         {

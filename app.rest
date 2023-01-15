@@ -1,11 +1,11 @@
 ###
-GET http://localhost:3000/health-check/live
+GET http://localhost:3000/api/health-check/live
 
 ###
-GET http://localhost:3000/health-check/ready
+GET http://localhost:3000/api/health-check/ready
 
 ###
-POST http://localhost:3000/users
+POST http://localhost:3000/api/users
 Content-Type: application/json
 
 {
@@ -16,7 +16,7 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:3000/users
+POST http://localhost:3000/api/users
 Content-Type: application/json
 
 {
@@ -27,7 +27,7 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:3000/users
+POST http://localhost:3000/api/users
 Content-Type: application/json
 Accept-Language: pt-BR
 
@@ -39,7 +39,7 @@ Accept-Language: pt-BR
 }
 
 ###
-POST http://localhost:3000/users
+POST http://localhost:3000/api/users
 Content-Type: application/json
 Accept-Language: en-US
 
@@ -51,9 +51,9 @@ Accept-Language: en-US
 }
 
 ###
-GET http://localhost:3000/users/by-name?name=jszero
+GET http://localhost:3000/api/users/by-name?name=jszero
 
 
 ###
-GET http://localhost:3000/users/by-name?name=unknown
+GET http://localhost:3000/api/users/by-name?name=unknown
 

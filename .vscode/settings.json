@@ -4,9 +4,13 @@
     "source.addMissingImports": true,
     "source.fixAll.eslint": true
   },
+  "sonarlint.connectedMode.project": {
+    "connectionId": "jtsato",
+    "projectKey": "jtsato_nestjs-clean-architecture-example"
+  },
   "prettier.singleQuote": true,
   "[typescript]": {
-    "editor.defaultFormatter": "vscode.typescript-language-features"
+    "editor.defaultFormatter": "EditorConfig.EditorConfig"
   },
   "workbench.iconTheme": "material-icon-theme",
   "material-icon-theme.activeIconPack": "nest",

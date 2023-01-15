@@ -1,15 +1,19 @@
+import { ConfigModule } from '@nestjs/config';
 import { ClassSerializerInterceptor, Module } from '@nestjs/common';
 import { APP_INTERCEPTOR } from '@nestjs/core';
-import { AppController } from '@/app.controller';
-import { AppService } from '@/app.service';
 import { GetUserByNameModule } from '@/web-api/entrypoints/get-user-by-name';
 import { RegisterUserModule } from '@/web-api/entrypoints/register-user';
+import { HealthCheckModule } from './web-api/entrypoints/health-check';
 
 @Module({
-    imports: [RegisterUserModule, GetUserByNameModule],
-    controllers: [AppController],
+    imports: [RegisterUserModule, GetUserByNameModule, HealthCheckModule,
+        ConfigModule.forRoot({
+            isGlobal: true,
+            envFilePath: './.env',
+        }),
+    ],
+    controllers: [],
     providers: [
-        AppService,
         {
             provide: APP_INTERCEPTOR,
             useClass: ClassSerializerInterceptor,

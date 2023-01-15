@@ -13,7 +13,7 @@ export class StopwatchInterceptor implements NestInterceptor {
 
     private log(context: ExecutionContext, now: number): (value: any) => void {
         return () => {
-            this.logger.log(`Method ${context.getClass().name} executed in ${Date.now() - now} ms.`);
+            this.logger.log(`${context.getClass().name} executed in ${Date.now() - now} ms.`);
         };
     }
 }

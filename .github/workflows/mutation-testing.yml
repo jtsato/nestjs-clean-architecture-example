@@ -32,15 +32,6 @@ jobs:
           persist-credentials: true
           fetch-depth: 0
 
-      - name: Getting System Information
-        run: |
-          echo "Number of processors:"
-          grep -c ^processor /proc/cpuinfo
-          echo "Number of cores:"
-          grep ^cpu\\scores /proc/cpuinfo | uniq |  awk '{print $4}'
-          echo "Stryker Configuration:"
-          cat stryker.conf.json | grep "concurrency" | tr -d '"' | tr -d ','
-
       - name: Setup NodeJs [v18]
         uses: actions/setup-node@v3
         with:
@@ -75,6 +66,7 @@ jobs:
       - name: Commit the changes
         if: ${{ env.SHOULD_I_COMMIT == 'Yes' }}
         run: |
+		  git config advice.ignoredHook false
           git config pull.rebase false
           git config --local user.email "action@github.com"
           git config --local user.name "Stryker.NET"
