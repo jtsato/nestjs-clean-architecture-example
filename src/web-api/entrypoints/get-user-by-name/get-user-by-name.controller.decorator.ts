@@ -1,8 +1,7 @@
 /* eslint-disable sonarjs/no-duplicate-string */
 
 import { Controller, Get, Header, Inject, Query, UseInterceptors } from '@nestjs/common';
-import {
-    ApiOperation,
+import { ApiOperation,
     ApiConsumes,
     ApiProduces,
     ApiHeader,
@@ -13,8 +12,7 @@ import {
     ApiSecurity,
     ApiQuery,
     ApiOkResponse,
-    ApiNotFoundResponse
-} from '@nestjs/swagger';
+    ApiNotFoundResponse } from '@nestjs/swagger';
 import { Field, HttpResponse, ResponseStatus } from '@/web-api/commons/models';
 import { StopwatchInterceptor } from '@/web-api/commons/interceptors';
 import { IGetUserByNameControllerSymbol, IGetUserByNameController } from './get-user-by-name.controller.interface';
