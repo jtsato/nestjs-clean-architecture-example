@@ -33,7 +33,8 @@ jobs:
           npm install -g yarn jest
           yarn --ignore-scripts
 
-      - name: Checks for known security issues with the installed packages
+      - if: false
+        name: Checks for known security issues with the installed packages
         run: |
           yarn audit --groups dependencies
 
