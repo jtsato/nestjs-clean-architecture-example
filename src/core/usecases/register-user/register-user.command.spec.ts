@@ -1,4 +1,4 @@
-/* eslint-disable sonarjs/no-duplicate-string */
+ 
 
 import { ValidationException } from '@/core/exceptions';
 import { RegisterUserCommand, RegisterUserCommandValidator } from '@/core/usecases/register-user';

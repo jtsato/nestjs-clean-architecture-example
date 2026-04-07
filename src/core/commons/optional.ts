@@ -44,7 +44,6 @@ export class Optional<T> {
         if (this.isPresent()) {
             return this.value;
         }
-        // eslint-disable-next-line @typescript-eslint/no-throw-literal
         throw error();
     }
 

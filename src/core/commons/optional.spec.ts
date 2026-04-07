@@ -1,4 +1,4 @@
-/* eslint-disable sonarjs/no-duplicate-string */
+ 
 
 import { Optional } from './optional';
 
@@ -44,7 +44,7 @@ describe('Optional', () => {
             expect(optional).toStrictEqual(Optional.empty());
         });
 
-        it('should return an empty Optional when value is undefined', () => {
+        it('should throw when getting empty Optional created from undefined', () => {
             const optional = Optional.ofNullable(undefined);
             expect(optional.isPresent()).toBe(false);
             // eslint-disable-next-line @typescript-eslint/no-unsafe-return

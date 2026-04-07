@@ -1,5 +1,5 @@
 /* eslint-disable jest/expect-expect */
-import * as request from 'supertest';
+import request from 'supertest';
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import { AppModule } from '@/app.module';

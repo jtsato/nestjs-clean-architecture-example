@@ -1,4 +1,4 @@
-/* eslint-disable sonarjs/no-duplicate-string */
+ 
 
 import { mock, MockProxy, mockReset } from 'jest-mock-extended';
 import { CatchExceptionHelper, dataObjectMatcher } from '~/test/helpers';

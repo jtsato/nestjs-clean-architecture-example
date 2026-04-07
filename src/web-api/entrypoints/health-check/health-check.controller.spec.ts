@@ -1,7 +1,7 @@
-import { ClassSerializerInterceptor, INestApplication, Scope } from '@nestjs/common';
+import { ClassSerializerInterceptor, INestApplication } from '@nestjs/common';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { Test } from '@nestjs/testing';
-import * as request from 'supertest';
+import request from 'supertest';
 import { I18nModule } from '@/web-api/commons/modules';
 import { HealthCheckModule } from './health-check.module';
 

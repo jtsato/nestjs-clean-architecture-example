@@ -1,4 +1,4 @@
-/* eslint-disable sonarjs/no-duplicate-string */
+ 
 
 import { Controller, Get, Header, Inject, Query, UseInterceptors } from '@nestjs/common';
 import { ApiOperation,

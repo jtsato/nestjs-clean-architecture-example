@@ -2,7 +2,7 @@ import { Optional } from '@/core/commons/optional';
 import { User } from '@/core/models';
 
 export class UserRepository {
-    public static users: Array<User> = [];
+    public static readonly users: Array<User> = [];
 
     public save(user: User): Promise<User> {
         const nextId = UserRepository.users.length + 1;
