@@ -23,14 +23,14 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Setup NodeJs [v18]
-        uses: actions/setup-node@v3
+      - name: Setup NodeJs [v20]
+        uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
 
       - name: Install dependencies
         run: |
-          npm install -g yarn jest
+          npm install -g yarn
           yarn --ignore-scripts
 
       - if: false
