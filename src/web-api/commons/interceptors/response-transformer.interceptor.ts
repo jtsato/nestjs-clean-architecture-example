@@ -6,7 +6,7 @@ import { HttpResponse } from '@/web-api/commons/models';
 
 @Injectable()
 export class ResponseTransformerInterceptor implements NestInterceptor {
-    private httpAdapter: AbstractHttpAdapter;
+    private readonly httpAdapter: AbstractHttpAdapter;
 
     constructor(adapterHost: HttpAdapterHost) {
         this.httpAdapter = adapterHost.httpAdapter;

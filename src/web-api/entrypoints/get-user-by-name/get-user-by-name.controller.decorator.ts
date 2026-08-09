@@ -22,7 +22,7 @@ import { UserResponse } from '@/web-api/xcutting';
 @Controller('/users/by-name')
 @UseInterceptors(StopwatchInterceptor)
 export class GetUserByNameDecoratorController {
-    constructor(@Inject(IGetUserByNameControllerSymbol) private getUserByNameController: IGetUserByNameController) { }
+    constructor(@Inject(IGetUserByNameControllerSymbol) private readonly getUserByNameController: IGetUserByNameController) { }
 
     @ApiExtraModels(ResponseStatus, Field, UserResponse)
     @ApiConsumes('application/json')

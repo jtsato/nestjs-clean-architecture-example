@@ -5,7 +5,7 @@ import { UserPresenter, UserResponse } from '@/web-api/xcutting';
 import { IGetUserByNameController } from './get-user-by-name.controller.interface';
 
 export class GetUserByNameController implements IGetUserByNameController {
-    constructor(@Inject(IGetUserByNameUseCaseSymbol) private getUserByNameUseCase: IGetUserByNameUseCase) { }
+    constructor(@Inject(IGetUserByNameUseCaseSymbol) private readonly getUserByNameUseCase: IGetUserByNameUseCase) { }
 
     async execute(name: string): Promise<UserResponse> {
         const query: GetUserByNameQuery = new GetUserByNameQuery(name);

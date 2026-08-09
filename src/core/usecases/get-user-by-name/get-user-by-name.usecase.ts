@@ -6,7 +6,7 @@ import { IGetUserByNameGateway, IGetUserByNameGatewaySymbol } from '@/core/useca
 
 @Injectable()
 export class GetUserByNameUseCase implements IGetUserByNameUseCase {
-    constructor(@Inject(IGetUserByNameGatewaySymbol) private gateway: IGetUserByNameGateway) { }
+    constructor(@Inject(IGetUserByNameGatewaySymbol) private readonly gateway: IGetUserByNameGateway) { }
     async execute(query: GetUserByNameQuery): Promise<User> {
         const optional = await this.gateway.execute(query.name);
         return optional.orElseThrow(() => new NotFoundException('validation.user.name.not.found', [query.name]));

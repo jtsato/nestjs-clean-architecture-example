@@ -7,7 +7,7 @@ import { IRegisterUserGateway } from '@/core/usecases/register-user/register-use
 
 @Injectable()
 export class RegisterUserProvider implements IRegisterUserGateway {
-    constructor(private userRepository: UserRepository) { }
+    constructor(private readonly userRepository: UserRepository) { }
 
     async execute(user: User): Promise<User> {
         const entity: UserEntity = UserMapper.toUserEntity(user);

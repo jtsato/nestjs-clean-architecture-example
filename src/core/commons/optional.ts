@@ -21,7 +21,7 @@ export class Optional<T> {
     }
 
     public static ofNullable<T>(value: T): Optional<T> {
-        return value != null ? Optional.of(value) : Optional.empty();
+        return value == null ? Optional.empty() : Optional.of(value);
     }
 
     public isPresent(): boolean {

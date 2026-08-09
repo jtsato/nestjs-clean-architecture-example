@@ -1,23 +1,23 @@
 import { HttpResponse } from './http-response.model';
 
 export class HttpResponseBuilder {
-    private httpResponse: HttpResponse = {
+    private readonly httpResponse: HttpResponse = {
         status: 200,
         headers: {},
         body: {},
     };
 
-    public withStatus(status: number): HttpResponseBuilder {
+    public withStatus(status: number): this {
         this.httpResponse.status = status;
         return this;
     }
 
-    public withHeaders(headers: object): HttpResponseBuilder {
+    public withHeaders(headers: object): this {
         this.httpResponse.headers = headers;
         return this;
     }
 
-    public withBody(body: object): HttpResponseBuilder {
+    public withBody(body: object): this {
         this.httpResponse.body = body;
         return this;
     }

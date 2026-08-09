@@ -22,7 +22,7 @@ import { RegisterUserRequest } from './register-user-request.model';
 @Controller('/users')
 @UseInterceptors(StopwatchInterceptor)
 export class RegisterUserDecoratorController {
-    constructor(@Inject(IRegisterUserControllerSymbol) private registerUserController: IRegisterUserController) { }
+    constructor(@Inject(IRegisterUserControllerSymbol) private readonly registerUserController: IRegisterUserController) { }
 
     @ApiExtraModels(ResponseStatus, Field, UserResponse)
     @ApiConsumes('application/json')

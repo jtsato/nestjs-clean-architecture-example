@@ -7,7 +7,7 @@ import { Optional } from '@/core/commons/optional';
 
 @Injectable()
 export class GetUserByNameProvider implements IGetUserByNameGateway {
-    constructor(private userRepository: UserRepository) { }
+    constructor(private readonly userRepository: UserRepository) { }
 
     async execute(name: string): Promise<Optional<User>> {
         const optional = await this.userRepository.findByName(name);

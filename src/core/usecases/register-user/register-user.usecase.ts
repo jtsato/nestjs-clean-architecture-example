@@ -9,11 +9,11 @@ import { IGetDateTimeService, IGetDateTimeServiceSymbol } from '@/core/commons/g
 export class RegisterUserUseCase implements IRegisterUserUseCase {
     constructor(
         @Inject(IGetUserByNameGatewaySymbol)
-        private getUserByNameGateway: IGetUserByNameGateway,
+        private readonly getUserByNameGateway: IGetUserByNameGateway,
         @Inject(IGetDateTimeServiceSymbol)
-        private getDateTimeService: IGetDateTimeService,
+        private readonly getDateTimeService: IGetDateTimeService,
         @Inject(IRegisterUserGatewaySymbol)
-        private registerUserGateway: IRegisterUserGateway,
+        private readonly registerUserGateway: IRegisterUserGateway,
     ) { }
     async execute(command: RegisterUserCommand): Promise<User> {
         await this.checkDuplicatedName(command.name);

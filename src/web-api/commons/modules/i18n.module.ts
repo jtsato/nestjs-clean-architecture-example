@@ -1,6 +1,6 @@
 import { Module, Scope } from '@nestjs/common';
 import { AcceptLanguageResolver, I18nModule as ExternalI18nModule } from 'nestjs-i18n';
-import * as path from 'path';
+import * as path from 'node:path';
 import { II18nServiceSymbol } from '@/core/commons';
 import { I18nService } from '@/web-api/commons/services';
 

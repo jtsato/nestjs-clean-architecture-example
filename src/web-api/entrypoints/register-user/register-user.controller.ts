@@ -7,7 +7,7 @@ import { IRegisterUserUseCase, IRegisterUserUseCaseSymbol, RegisterUserCommand }
 import { IRegisterUserController } from './register-user.controller.interface';
 
 export class RegisterUserController implements IRegisterUserController {
-    constructor(@Inject(IRegisterUserUseCaseSymbol) private registerUserUseCase: IRegisterUserUseCase) { }
+    constructor(@Inject(IRegisterUserUseCaseSymbol) private readonly registerUserUseCase: IRegisterUserUseCase) { }
 
     async execute(request: RegisterUserRequest): Promise<HttpResponse> {
         const command: RegisterUserCommand = new RegisterUserCommand(
